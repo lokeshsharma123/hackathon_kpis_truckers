@@ -1,0 +1,105 @@
+<template name="register_company">
+    {{>navbar title="Company Registration Form" left="Cancel" right=option internal=true}}
+    <form>    
+	<div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Email" id="email" type="text" class="validate">
+                    <label for="last_name">Email</label>
+                </div>
+           
+                <div class="input-field col s6">
+                    <input placeholder="Password" id="password" type="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+ 
+    
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Company Name" id="company_name" type="text" class="validate">
+                    <label for="first_name">Company Name</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="USDOT No." id="usdot_no" type="number" class="validate">
+                    <label for="usdot_no">USDOT No.</label>
+                </div>
+            </div>
+			  <div class="row">
+                <div class="input-field col s12">
+				 <textarea id="mainoffice" class="materialize-textarea" placeholder="Main Office Address"></textarea>
+                    
+                    <label for="mainoffice">Main Office Address</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                      <textarea id="terminal" class="materialize-textarea" placeholder="Terminal Address"></textarea>
+                 
+					<label for="terminal">Terminal Address</label>
+                </div>
+				
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Phone" id="phone" type="text" class="validate">
+                    <label for="phone">Phone</label>
+                </div>
+            </div>
+           
+           <!-- <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Career Name" id="careername" type="text" class="validate">
+                    <label for="careername">Career Name</label>
+                </div>
+            </div>-->
+          
+			<div class="row">
+			 <div class="input-field col s12">
+                   <!-- <input placeholder="Cargo Type" id="cargo_type" type="text" class="validate">
+                    <label for="cargo_type">Cargo Type</label>-->
+					<select id="cargo_type" class="browser-default">
+                        <option value="select" disabled selected>Choose Cargo Type</option>
+                        {{#each cargo_type_list}}
+						{{#if equals cargo_type "Property"}}
+						<option value="{{_id}}" selected>{{cargo_type}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{cargo_type}}</option>
+						{{/if}}
+						{{/each}}
+                    </select>
+					 <!--<label for="cargo_type">Cargo Type</label>-->
+                </div>
+				  </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="httz" class="browser-default">
+                        <option value="select" disabled>Choose Home Terminal Time Zone</option>
+                         {{#each httz_list}}
+						 {{#if equals timezone "Eastern Time(US & Canada)"}}
+						<option value="{{locationID}}" selected>{{timezone}}</option>
+						{{else}}
+						<option value="{{locationID}}">{{timezone}}</option>
+						{{/if}}
+						
+						 {{/each}}
+                    </select>
+                   <!-- <label for="httz">Home Terminal Time Zone</label>-->
+                </div>
+            </div>
+              <!--<div class="row">
+                <div class="input-field col s12">
+                  <select id="odometer">
+                        <option value="select" disabled>Choose your option</option>
+                        <option value="1" selected>MILES</option>
+                    </select>
+                    <label for="odometer">ODOMETER</label>-->
+					<!--<input placeholder="Odometer" id="odometer" type="number" class="validate">
+                    <label for="odometer">Odometer</label>
+                </div>
+            </div>-->
+			{{>primary_cycle}}
+        </form>
+    
+</template>

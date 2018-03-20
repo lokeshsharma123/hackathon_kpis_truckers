@@ -1,0 +1,56 @@
+<template name="individal_day_form_dvir_record">
+<div class="row">
+{{>disclaimer}}
+</div>
+<div class="row">
+
+<div class="col s5 offset-s7">
+<img class="sign_image" height="50" src="data:image/png;base64,{{data.sign.signature_file}}" />
+<hr>
+<center><h6>Driver Signature</h6></center>
+</div>
+</div>
+
+<div class="row">
+<center><h6><b>DRIVER's VEHICLE INSPECTION REPORT</b></h6></center>
+
+
+<table class="report_table centered z-depth-1">
+<thead>
+ <tr>
+ <th>Truck Inspection</th>
+ <th>Trailer Inspection</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>
+ {{#if data.dv}}
+<ol>
+{{#each data.dv}}
+<li>{{defect.defect}}</li>
+{{/each}}
+</ol>
+{{else}}
+No defects found
+{{/if}}
+ </td>
+<td>
+ {{#if data.dt}}
+<ol>
+{{#each data.dt}}
+<li>{{defect.defect}}</li>
+{{/each}}
+</ol>
+{{else}}
+No defects found
+{{/if}}
+ </td>
+ 
+ </tr>
+ </tbody>
+</table>
+</div>
+
+
+</template>

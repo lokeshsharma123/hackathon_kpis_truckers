@@ -1,0 +1,32 @@
+<template name="sign_log">
+    <div class="container">
+	<br />
+	 {{>disclaimer}}
+	 <br /><br />
+	  <p>
+      <input type="checkbox" id="test5" />
+      <label for="test5">AGREE</label>
+    </p>
+	<p>
+      <input type="checkbox" id="test6" />
+      <label for="test6">Not Ready</label>
+    </p>
+	<img src="data:image/png;base64,{{signature}}" style="max-width:300px" />
+	 <br /><br />
+	<a  href="/create-new-signature" class="btn secondary">Create New Signature</a>
+ 
+ 
+<div class="row">
+   <div class="input-field col s12">
+       <input placeholder="Output File Comment" id="output_file_comment" maxlength="60" type="text" class="validate">
+       <label for="output_file_comment">Output File Comment</label>
+	   <i class="material-icons prefix error_alert hidden" id="error_output_file_comment">
+	   &#xE001;
+	   </i>
+   </div>
+ </div>
+ 
+    </div>
+	
+
+</template>

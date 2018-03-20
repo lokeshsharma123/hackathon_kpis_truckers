@@ -1,0 +1,12 @@
+<template name="remaining_list">
+ <ul class="collection with-header" style="border-top:0px">
+        <li class="collection-header"><h5>Pending</h5></li>
+{{#each list}}
+<li class="collection-item rem_list">
+<a >
+            {{this.name}}
+        </a><a   class="secondary-content"><i class="material-icons prefix error_alert">error_outline</i></a>
+</li>
+{{/each}}
+</ul>
+</template>

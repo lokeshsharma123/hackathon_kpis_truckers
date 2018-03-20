@@ -1,0 +1,51 @@
+<template name="document_manager">
+      
+{{#if equals profile.type "driver"}} 
+
+{{#unless show_upload_document_screen}} 
+{{>navbar title="My Document" internal=false right="ellipsis_icon"}} 
+   <div class="row">
+			 <div class="input-field col s12">
+                  	<select id="company_id" class="browser-default">
+                        <option value="select" disabled selected>Choose Company</option>
+                        {{#each company_list}}
+						{{#if selected_company_id}}
+						<option value="{{this.company_id}}" selected>{{this.company_profile.company_name}}</option>
+						{{else}}
+						<option value="{{this.company_id}}" >{{this.company_profile.company_name}}</option>
+						{{/if}}
+						 {{/each}}
+                    </select>
+                </div>
+				  </div>
+	<div class="row">
+			 <div class="input-field col s12">
+                   <input type="text" id="date" value="{{date}}" class="datepicker">
+				   <label for="date" class="active">Select Date</label>
+                </div>
+				  </div>
+				  <!--  <div class="row">
+			 <div class="input-field col s12">
+                  	<select id="company_id" class="browser-default">
+                        <option value="select" disabled selected>Choose Category</option>
+                        {{#each category_list}}
+						<option value="{{_id}}" >{{this.category}}</option>
+						 {{/each}}
+                    </select>
+                </div>
+				  </div>-->
+		<div class="row">
+			 <div class="input-field col s12">
+                  <a class="waves-effect waves-light btn" id="search">SEARCH</a>
+                 </div>
+				  </div>		   
+		<div class="container">
+		{{#if display_documents}}
+		{{>shipping_documents_list hide_plus_link="false"}}
+		{{/if}}
+		</div>
+		{{else}}
+		{{>upload_shipping_documents}}
+		{{/unless}}
+	{{/if}}
+</template>

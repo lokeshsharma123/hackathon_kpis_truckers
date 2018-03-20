@@ -1,0 +1,360 @@
+   var pdf = new jsPDF('p', 'pt', 'a4',true);
+Template.reports_template.onRendered(function(){
+ $('.modal').modal();
+  fetch_report_data();
+ 
+});
+Template.reports_template.events({
+"click #get_report":function(){
+var val=$("#no_of_days_input").val()
+Meteor.call('fetchReport', val);
+}
+});
+Template.reports_template.events({
+"click #send_email":function(){
+    pdf = new jsPDF('p', 'pt', 'a4',true);
+  getSinglePdfPage(0);
+}
+});
+Meteor.methods({
+  'fetchReport': function(val){
+        Template.instance().no_of_days.set(val)
+    fetch_report_data();
+    }
+});
+Template.reports_template.helpers({
+"array":function(){
+return Session.get("reportData");
+},
+"no_of_days":function(){
+ return Template.instance().no_of_days.get();
+}
+})
+Template.reports_template.onCreated(function(){
+ this.no_of_days = new ReactiveVar("1");
+});
+ 
+Template.reports_template.events({
+  "click .fetch8record":function(){
+    Template.instance().no_of_days.set(8);
+    Meteor.call('fetchReport', 8);
+  }
+});
+ 
+
+fetch_report_data=function fetch_report_data(){
+ Blaze._globalHelpers.callLocation();
+ var array=[];
+ var company_id=Session.get("company_id_to_subscribe")
+ var userId = Meteor.userId();
+ if(Session.get("isFromCompany")){
+     userId =  Session.get("senserUserId")
+ }
+ var date_to_find
+   for(var ii=1;ii<=Template.instance().no_of_days.get();ii++){
+   var datee=localDateTime(Session.get("companyLocationOffset"))
+   var ob={}
+   datee.setDate(datee.getDate()-ii+1);
+   date_to_find=datee.toDateString()
+   //******************************************************************************************************************
+   var dateFormat = {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'};
+    var today2 = datee;
+    var _today = today2.toLocaleDateString("en-US", dateFormat);
+	 //******************************************************************************************************************
+	 ob.dvir=DVIRLog.findOne({userid:userId,date:date_to_find,company_id:company_id});
+     ob.CMVList=DVIRLog.find({date_of_entry:{
+        $gte: new Date((new Date().getTime() - (8 * 24 * 60 * 60 * 1000)))
+ },
+ userid:userId
+},{sort:{date_of_entry:-1}}
+).fetch();
+	 ob.form=Form.findOne({userid:userId,date:date_to_find,company_id:company_id});
+	 ob.sign=SignLog.findOne({userid:userId,company_id:company_id,date:date_to_find},{sort:{date_of_entry:-1}});
+	 ob.dt=DVIRTrailerDefect.find({userid:userId,date:date_to_find,company_id:company_id}).fetch();
+	 ob.dv=DVIRVehicleDefect.find({userid:userId,date:date_to_find,company_id:company_id}).fetch();
+	 ob.date=date_to_find
+	 ob.cdp=CompanyDriverList.findOne({company_id:company_id,driver_id:userId})
+	 ob.user=Meteor.user()?Meteor.user().profile:Session.get("login_user").profile
+	 
+         ob.graph_date=_today;
+   ob.canvas_counter=ii;
+         var signFlagRecord = DriverFlags.findOne({userId:userId, date: date_to_find,companyId:company_id});
+           if(signFlagRecord && signFlagRecord.signFlag && ob.sign && ob.sign.signature_file){
+            ob.sign.signature_file = null;
+        }
+         
+        var profile = ob.cdp.company_profile;
+      
+        if (profile) {
+            if (profile.cycle_rule) {
+                var cycleRule = CycleRuleList.find({_id: profile.cycle_rule}).fetch();
+                
+                if (cycleRule.length > 0 ) {
+                  ob.cycle_rule = cycleRule[0].rule;
+                }
+                 console.log(ob.cycle_rule);
+            }
+        }
+          //***********************************************Suresh********************************************
+   var statusMap = {3.5: "Off Duty", 2.5: "Sleeper", 1.5: "Driving", 0.5: "ON Duty",4.5:"yardmove",5.5:"personalduty"};
+
+             var recordEvents= Events.find({date:{
+                $gte: new Date((new Date().getTime() - (8 * 24 * 60 * 60 * 1000)))
+         },userId:userId/* ,
+                '$or': [ { companyId:company_id }, { evenType: 5 } ] */ },{sort:{date:-1}}).fetch();
+
+var ret=[];
+
+var ret1=[];
+
+  if(recordEvents.length>0){
+        var stardOd = recordEvents[0].vehicleMiles;
+    if(Blaze._globalHelpers.isBleConnecte() && datee.toDateString() == localDateTime(Session.get("companyLocationOffset")).toDateString()){
+     var lastOd = Blaze._globalHelpers.getOdometer();
+    
+     if(lastOd && lastOd !== '' && stardOd && stardOd !== '')
+     {  ob.odometer  = lastOd-stardOd;
+     }
+     
+     else if(ob.form && ob.form.distance){
+          ob.odometer = ob.form.distance;
+      }
+     
+  }
+  else {
+      if(ob.form && ob.form.distance){
+          ob.odometer = ob.form.distance;
+      }
+      else if( recordEvents[recordEvents.length-1].vehicleMiles && stardOd)
+       ob.odometer  = recordEvents[recordEvents.length-1].vehicleMiles-stardOd;
+   else{
+       ob.odometer = "";
+   }
+  }
+      ob.engine_hour  = recordEvents[0].engineHour;
+  }
+  
+ // in fetch_report_data function
+ 
+ if(datee.toDateString() == localDateTime(Session.get("companyLocationOffset")).toDateString()){
+    
+ var vin_no = "default"; 
+  if(!ob.dvir){
+    ob.dvir = {};
+  }
+
+ var dvirLog = DVIRLog.find({userid:userId,company_id:company_id,date:date_to_find},{sort:{date_of_entry:-1}}).fetch();
+    if(dvirLog.length > 0 && !!dvirLog[0].vin_no.trim()){
+      vin_no = dvirLog[0].vin_no;
+      }
+ else if(Blaze._globalHelpers.isBleConnecte()){
+      vin_no = Blaze._globalHelpers.getVin();
+ }
+  else{
+      var btLog = BTlog.find({datatype:'vin',username : Users.findOne().profile.username},{sort:{date:-1}}).fetch();
+        if(btLog.length > 0){
+           if(btLog[0].decrypteddata)
+               vin_no = btLog[0].decrypteddata;
+ }
+ }
+       ob.dvir.vin_no = vin_no
+  }
+  
+   for(var i = 0;i<recordEvents.length;i++){
+        if(recordEvents[i].recordStatus == 2){
+            
+            continue;
+        }
+        var status  = "";
+        var origin = "driver";
+        
+         if(recordEvents[i].eventType== 1){
+           var code = 4.5-recordEvents[i].eventCode;
+           status = statusMap[code];
+          // alert(status);
+        }
+        else if(recordEvents[i].eventType == 3){
+            var code = 3.5+recordEvents[i].eventCode;
+              status = statusMap[code];
+        }
+        else if(recordEvents[i].eventType == 5){
+           if(recordEvents[i].eventCode == 1){
+               status = "login"
+           }
+           else {
+               status = "logout" 
+           }
+        }
+         else if(recordEvents[i].eventType == 4){
+                 status = "Sign"
+           }
+        if(recordEvents[i].recordOrigin == 1){
+            origin = "auto";
+        }
+         else if(recordEvents[i].recordOrigin == 3){
+            origin = "company";
+        }                       
+         ret.push({
+            start_time: changeNumToTime(recordEvents[i].start_time),
+            location: recordEvents[i].location,
+            odometer: (recordEvents[i].modified != 0) ? "" : (isNaN(recordEvents[i].vehicleMiles)) ? "" : recordEvents[i].vehicleMiles,
+            engine_hour: (recordEvents[i].modified != 0) ? "" : (isNaN(recordEvents[i].engineHour)) ? "" : recordEvents[i].engineHour,
+            status: status,
+            origin: origin,
+            type:recordEvents[i].eventType,
+            time_number:recordEvents[i].start_time
+            
+        });
+ ret1.push({
+                seqId: recordEvents[i].seqId,
+                EventSequenceIDNumber:recordEvents[i].EventSequenceIDNumber,
+                userId:recordEvents[i].userId,
+                recordStatus: recordEvents[i].recordStatus,
+                recordOrigin: recordEvents[i].recordOrigin,
+                eventType: recordEvents[i].eventType,
+                eventCode: recordEvents[i].eventCode,
+                date: recordEvents[i].date,
+                time:recordEvents[i].time,
+                eventDate: recordEvents[i].eventDate,
+                eventTime:recordEvents[i].eventTime,
+                vehicleMiles:recordEvents[i].vehicleMiles,
+                engineHour:recordEvents[i].engineHour,
+                latitude:recordEvents[i].latitude,
+                longitude:recordEvents[i].longitude,
+                comment:recordEvents[i].comment,
+                location:recordEvents[i].location,
+                DateOfTheCertifiedRecord:recordEvents[i].DateOfTheCertifiedRecord,
+                DistanceSinceLastValidCoordinates:recordEvents[i].DistanceSinceLastValidCoordinates,
+                CorrespondingCMVOrderNumber:recordEvents[i].CorrespondingCMVOrderNumber,
+                UserOrderNumberForRecordOriginator:recordEvents[i].UserOrderNumberForRecordOriginator,
+                malfunctionCode:recordEvents[i].malfunctionCode,
+                DataDiagnosticEventIndicatorStatusForDriver:recordEvents[i].DataDiagnosticEventIndicatorStatusForDriver
+                
+            });
+            }
+             ob.events=ret1
+		
+         ob.graph_statuses=ret
+         array.push(ob)
+         console.log(ret);
+}
+   Session.set("reportData",array)
+/* 
+Meteor.call("getReportData",{no_of_days:Template.instance().no_of_days.get(),company_id:Session.get("company_id_to_subscribe")},function(err,res){
+setTimeout(function(){hide_loader()},1000)
+if(!err)
+{
+  setTimeout(function(){Session.set("reportData",res);},1000);
+}
+else
+show_toast(err)
+});
+ */
+
+}
+
+function changeNumToTime(num) {
+     
+  if ((num + '').includes(".")) {
+      
+        var decPart = ((num + "").split(".")[1]);
+        var dec1 = "."+decPart;
+        
+        dec1 = Number(dec1)*0.6 ;
+        dec1 = (dec1+"").replace('0.','');
+        while ((dec1 + '').length < 2) {
+            dec1 =  dec1 +'0'
+        }
+        dec1 = dec1.substr(0, 2) + '.' + dec1.substr(2);
+        dec1 = Math.round(dec1);
+        while ((dec1 + '').length < 2) {
+            dec1 = '0' + dec1
+        }
+        var intPart = parseInt((num + "").split(".")[0]);
+         num =  ( intPart+":"+ dec1);
+    }
+    else {
+        num = num + ':00';
+    }
+    return num;
+}
+
+
+
+function getSinglePdfPage(i) {
+
+    html2canvas($('#main'+i), {
+         background :'#FFFFFF',
+        onrendered: function (canvas) {
+
+            var contentWidth = canvas.width;
+            var contentHeight = canvas.height;
+            
+            var ratio = contentWidth/contentHeight;
+
+            //The height of the canvas which one pdf page can show;
+            var pageHeight = contentWidth / 592.28 * 841.89;
+            //the height of canvas that haven't render to pdf
+            //a4 format [595.28,841.89]	      
+           
+            var imgHeight = pdf.internal.pageSize.height;
+            var imgWidth = pdf.internal.pageSize.width;
+            
+            var pageData = canvas.toDataURL('image/png', 1.0);
+            //
+        
+             i++;
+           
+           pdf.addImage(pageData, 'png', 0, 0, imgWidth,  imgHeight,'a'+i,'FAST');
+      
+           
+           var nextPage = document.getElementById('main'+i);
+           if(nextPage){
+             
+               pdf.addPage();
+                getSinglePdfPage(i);
+                return;
+           }
+             
+     
+            var pdfBase64 = pdf.output('datauristring');
+             //pdf.save('content.pdf')     
+    
+    var attachments = [{ filename:'report.pdf',path: pdfBase64}]
+
+                Meteor.call(
+  'sendEmail',
+  document.getElementById('to_email').value,
+  't4teldadmin@gmail.com',
+  'Driver Report!',
+  'Hello , please find driver report .Driver report.',
+  attachments
+);
+
+        }
+    })
+}
+
+Template.reports_template.events({
+	"click .gotoDriverlog":function(){
+ setCompanyOffset(Session.get("companyId"));
+		Router.go("/form/"+this.company_id);
+	}
+});
+
+
+Template.reports_template.events({
+	"click #open-email-modal":function(){
+		$('#email-modal').modal('open');
+	}
+});
+
+Template.reports_template.helpers({
+    "isFromDriver": function () {
+        if (Session.get("isFromCompany")) {
+            return false
+        } else {
+            return true;
+        }
+    }
+});

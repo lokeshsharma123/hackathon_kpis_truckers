@@ -1,0 +1,82 @@
+<template name="navbar">
+<style type="text/css">
+@media only screen and (min-width: 993px) {
+   nav a.button-collapse {
+    display: block;
+   }
+ }
+</style>
+    <div class="navbar-fixed light-blue darken-3">
+        <nav class="blue darken-3">
+            <div class="nav-wrapper">
+                {{#unless this.internal}}
+                <a class="left button-collapse" data-activates="slide-out" href="#" style="margin-left:10px">
+                    <i class="material-icons">
+                        &#xE5D2;
+                    </i>
+                </a>
+                {{/unless}}
+                <a class="brand-logo center" href="# " style="font-size: 1.2rem ">
+				<div class="row">
+				{{#if this.display_data_fetch_icons}}
+				{{>navbar_fetch_data_left_icon}}
+				{{/if}}
+				<div class="col s8 center-align">
+				   {{this.title}}
+				   </div>
+				 {{#if this.display_data_fetch_icons}}
+					{{>navbar_fetch_data_right_icon}}
+					 {{/if}}
+					</div>
+                </a>
+				
+				
+
+                <ul class="left">
+                    <li>
+                        <a href="# ">
+                            {{#if equals this.left "back_icon"}}
+                            <i class="material-icons">
+                                &#xE5C4;
+                            </i>
+                            <!-- <i aria-hidden="true" class="fa fa-chevron-left">
+                        </i> -->
+                            {{else}}
+                {{this.left}}
+                {{/if}}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="right">
+                    <li>
+                        {{#if equals this.right "ellipsis_icon"}}
+                        <a class="right_button dropdown-button" data-activates="dropdown1" href="#">
+                            <i class="material-icons">
+                                &#xE5D4;
+                            </i>
+                        </a>
+                        {{else}}
+                            {{#if this.right.string}}
+                        <a class="right_button" href="#">
+                            {{this.right.string}}
+                        </a>
+                        {{else}}
+                        <a class="right_button" href="#">
+                            {{this.right}}
+                        </a>
+                        {{/if}}
+                {{/if}}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {{#if this.tabbar}}
+                {{>tabbar}}
+        {{/if}}
+         {{#if this.tabbar2}}
+                {{>tabbar2}}
+        {{/if}}
+
+        {{>popover}}
+</template>

@@ -1,0 +1,10 @@
+.report_table {
+    border-collapse: collapse;
+}
+
+.report_table, .report_table td {
+    border: 1px solid #999;
+}
+.report_table tr td{
+padding-left:10px !important
+}

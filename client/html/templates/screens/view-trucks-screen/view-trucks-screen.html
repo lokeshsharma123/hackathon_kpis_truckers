@@ -1,0 +1,22 @@
+<template name="view_trucks_screen">
+{{>navbar left='back_icon' title="List of Trucks" internal=true right="ellipsis_icon"}}
+{{#if truck_list}}
+ 
+        <ul class="collection">
+		{{#each truck_list}}
+    <li class="collection-item row_link">
+      <div>{{vehicle_no}}
+     
+      <a  class="secondary-content"><i class="material-icons">send</i></a>
+	  </div>
+    </li>
+	{{/each}}
+	</ul>
+	{{else}}
+	<br />
+	<br />
+	<div class="container">
+	No trucks added so far
+	</div>
+	{{/if}}
+</template> 

@@ -1,0 +1,1 @@
+//Session.set("CurrentDate",localDateTime(Session.get("companyLocationOffset")));

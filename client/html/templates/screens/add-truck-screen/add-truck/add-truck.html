@@ -1,0 +1,56 @@
+<template name="add_truck">
+    {{>navbar title="Add Truck" left="Cancel" right=option internal=true}}
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Enter Truck  No" id="truck_no" type="text" class="validate">
+                    <label for="truck_no">Enter Truck  No</label>
+                </div>
+				<div class="input-field col s6">
+                    <input placeholder="Enter Truck  No" id="year" type="text" class="validate">
+                    <label for="year">YEAR</label>
+                </div>
+				 
+				 
+			 <div class="input-field col s6">
+                 	<select id="ride_type" class="browser-default">
+                        <option value="select" disabled selected>Select Ride Type</option>
+                        <option value="Spring Ride" >Spring Ride</option>
+						<option value="Air Ride" >Air Ride</option>
+						 
+                    </select>
+					 
+                </div>
+				<div class="input-field col s6">
+                 	<select id="type" class="browser-default">
+                        <option value="select" disabled selected>Select Type</option>
+                        <option value="Dry" >Dry</option>
+						<option value="Reefer" >Reefer</option>
+						<option value="Flat" >Flat</option>
+						 
+                    </select>
+					 
+                </div>
+				<div class="input-field col s6">
+                 	<select id="length" class="browser-default">
+                        <option value="select" disabled selected>Select Length</option>
+                        <option value="48" >48</option>
+						<option value="53" >53</option>
+					   </select>
+				   </div>
+				   <div class="input-field col s6">
+                 	<select id="doors" class="browser-default">
+                        <option value="select" disabled selected>Select Doors</option>
+                        <option value="Swing" >Swing</option>
+						<option value="Rollup Doors" >Rollup Doors</option>
+					   </select>
+				   </div>
+             
+			 
+				</div>
+			   
+           
+        </form>
+    </div>
+</template>

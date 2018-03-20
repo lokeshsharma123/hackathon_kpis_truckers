@@ -1,0 +1,106 @@
+<template name="general_form">
+    <br />
+	<!--<ul style="margin-top: 0px;line-height:3rem">
+        <li>
+            <div class="divider">
+            </div>
+        </li>
+        <li class="grey lighten-3">
+            <div class="container">
+                General
+            </div>
+        </li>
+        <li>
+            <div class="divider">
+            </div>
+        </li>
+    </ul>--> 
+   
+           <!-- <div class="row">
+                <div class="input-field col s7">
+				
+                    <input placeholder="Truck/Tractor Number" id="vehicles" type="text" value="{{vehicle_number}}"/>
+					
+                    <label for="vehicles" class="active">Truck/Tractor Number</label>
+					<i class="material-icons prefix error_alert hidden" id="error_vehicles">&#xE001;</i>
+                </div>
+                
+             
+			<div class="input-field col s5">
+                    <input placeholder="Trailer Number" id="trailers" type="text" class="validate" value="{{trailer_number}}">
+                    <label for="trailers" class="active">Trailer Number</label>
+					<i class="material-icons prefix error_alert hidden" id="error_trailers">&#xE001;</i>
+                </div>
+				</div>-->
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Distance" value={{distance}} id="distance" type="number" />
+                    <label for="distance" class="active">Distance</label>
+					<i class="material-icons prefix error_alert hidden" id="error_distance">&#xE001;</i>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Odometers"  id="odometers" type="number" value="{{odometers}}" class="validate" />
+                    <label for="odometers" class="active">Odometers</label>
+					<i class="material-icons prefix error_alert hidden" id="error_odometers">&#xE001;</i>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:0px">
+                <div class="input-field col s12">
+				<!--<textarea id="shipping_documents" class="materialize-textarea" data-length="120">
+				</textarea>
+				<label for="textarea1">Shipping Documents</label>-->
+                  <input placeholder="Shipping Documents" id="shipping_documents" value="{{shipping_documents_text}}" type="text" class="validate" />
+                    <label for="shipping_documents" class="active">Shipping Documents</label> 
+					<i class="material-icons prefix error_alert hidden" id="error_shipping_documents">
+					&#xE001;
+					</i>
+                </div>
+			 			 
+            </div>
+			
+		  <div class="row">
+		  <!--
+		  <div class="file-field input-field col s12">
+				{{>shipping_documents_list}}
+		 </div>
+		 -->
+			<!--<div class="file-field input-field col s12">
+      <div class="btn col s8">
+         Upload Documents <i class="material-icons">
+                                file_upload
+                            </i>
+        <input type="file" class="file_input">
+      </div>
+	   <div class="file-path-wrapper col s4">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>-->
+			</div>
+			
+            <div class="row">
+                <div class="input-field col s11">
+                    <input placeholder="Driver" disabled value={{driver}} id="driver" type="text" class="validate" />
+                    <label for="driver" class="active">Driver</label>
+					<i class="material-icons prefix error_alert hidden" id="error_driver">&#xE001;</i>
+					
+                </div>
+				   <div class="input-field col s1">
+				<a class="modal-trigger"><i class="material-icons prefix">
+				&#xE887;
+				</i></a>
+				</div>
+            </div>
+           
+        
+	
+	 <div id="driver_name_edit_indicator_modal" class="modal">
+    <div class="modal-content">
+      <h5>Edit Driver Name</h5>
+      <p>Click the following button to change the Driver Name </p>
+	  
+    </div>
+    <div class="modal-footer">
+      <a href="/profile" class="modal-action modal-close waves-effect waves-green btn">Edit Driver Name</a>
+    </div>
+  </div>
+</template>

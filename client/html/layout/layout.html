@@ -1,0 +1,16 @@
+<template name="layout">
+    {{#unless resetPassword}} 
+	{{> yield}} 
+	{{>preloader}} 
+	{{else}} 
+	{{>ResetPassword}} 
+	{{/unless}}
+	{{#unless isloginpage}}
+	{{#if equals profile.type "driver"}}
+	{{>navbar_bottom}}
+	 {{/if}}
+	{{>drawer}}
+	{{/unless}}
+	{{security_check}}
+	{{traker}}
+</template>

@@ -1,0 +1,117 @@
+.error_alert{
+right:0px !important;
+top:0px !important;
+color:#ef5350 !important;
+font-size:1.5rem
+}
+.error_alert.hidden{
+display:none;
+}
+.error_alert.active {
+color:#ef5350 !important
+}
+.bold-text{
+	font-weight:bold;
+}
+.side-nav{
+	z-index:99999;
+}
+
+ .label-hr{
+	position:absolute;
+	right:10px;
+	width: 45px;
+	font-weight:bold;
+	background:rgba(255,255,255,0.3);
+ }
+ .tCountOff{
+	top:17%;
+ }
+ .tCountSb{
+	top:39%;
+ }
+ .tCountD{
+	top:57%;
+ }
+ .tCountOn{
+	top:75%;
+ }
+
+ .wrapper {
+  width: 100%;
+  /* whatever width you want */
+  display: inline-block;
+  position: relative;
+}
+.wrapper:after {
+  padding-top: 30%;
+  /* 16:9 ratio */
+  display: block;
+  content: '';
+}
+.main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* fill parent 
+  background-color: deepskyblue;*/
+  /* let's see it! */
+  color: white;
+}
+.dotted-line{
+	height:0px;
+	border:1px dotted #0277bd;
+}
+.sub_nav_fixed{
+	position:fixed;
+	z-index:2;
+	width:100%;
+}
+.maring-top150{
+	margin-top:150px !important;
+}
+.maring-bottom150{
+	margin-bottom:150px !important;
+}
+.out-of-view
+{
+	position: fixed;
+	right: -29999px;
+	z-index: 1000;
+}
+.glass{
+	background:#00000078;
+}
+/* nav bottom */
+.icon-bar {
+    width: 100%;
+    background-color: #555;
+    overflow: hidden;
+	position: fixed;
+    bottom: 0;
+	z-index:99;
+}
+
+.icon-bar a {
+    float: left;
+    width: 50%;
+    text-align: center;
+    padding: 6px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 14px;
+}
+
+.icon-bar a:hover {
+    background-color: #000;
+}
+
+.icon-bar .active {
+    background-color: #4a88c2 !important;
+}
+.navbar-fixed-bottom{
+ min-height: 60px;
+}
+/* nav bottom */

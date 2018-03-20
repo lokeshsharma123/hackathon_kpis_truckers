@@ -1,0 +1,87 @@
+<template name="edit_company_profile">
+    {{>navbar title="Profile" left="Cancel" right=option internal=true}}
+     
+        <form>
+		<div class="row">
+                <div class="input-field col s12">
+                    <input disabled placeholder="Email" id="email" value="{{user.email}}"  type="text" class="validate">
+                    <label class="active" for="last_name">Email</label>
+                </div>
+           
+               
+            </div>
+ 
+    
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Company Name" value="{{user.company_name}}"  id="company_name" type="text" class="validate">
+                    <label class="active"  for="first_name">Company Name</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="USDOT No." disabled value="{{user.usdot_no}}"  id="usdot_no" type="number" class="validate">
+                    <label disabled class="active"  for="usdot_no">USDOT No.</label>
+                </div>
+            </div>
+			  <div class="row">
+                <div class="input-field col s12">
+				 <textarea id="mainoffice" value="{{user.mainoffice}}"  class="materialize-textarea" placeholder="Main Office Address"></textarea>
+                    
+                    <label class="active"  for="mainoffice">Main Office Address</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                      <textarea id="terminal" value="{{user.terminal}}"  class="materialize-textarea" placeholder="Terminal Address"></textarea>
+                 
+					<label class="active"  for="terminal">Terminal Address</label>
+                </div>
+				
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Phone" value="{{user.phone}}"  id="phone" type="text" class="validate">
+                    <label class="active"  for="phone">Phone</label>
+                </div>
+            </div>
+           
+           
+          
+			<div class="row">
+			
+			 <div class="input-field col s12">
+                   	<select id="cargo_type" class="browser-default">
+                        <option value="select" disabled>Choose Cargo Type</option>
+                        {{#each cargo_type_list}}
+						{{#if equals cargo_type user.cargo_type}}
+						<option value="{{_id}}" selected>{{cargo_type}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{cargo_type}}</option>
+						{{/if}}
+						{{/each}}
+                    </select>
+					 
+                </div>
+				  </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="httz" class="browser-default">
+                        <option value="select" disabled>Choose Home Terminal Time Zone</option>
+                         {{#each httz_list}}
+						 {{#if equals locationID user.httz}}
+						<option value="{{locationID}}" selected>{{timezone}}</option>
+						{{else}}
+						<option value="{{locationID}}">{{timezone}}</option>
+						{{/if}}
+						
+						 {{/each}}
+                    </select>
+                   
+                </div>
+            </div>
+			{{>primary_cycle user=user}}
+        </form>
+ 
+ 
+</template>

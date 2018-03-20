@@ -1,0 +1,10 @@
+{
+  "galaxy.meteor.com": { 
+   "env": { 
+     "ROOT_URL": "https://t4teld.meteorapp.com", 
+     "MONGO_URL": "mongodb://t4tuser:gntrucks@ds044587.mlab.com:44587/t4t",
+	 "MAIL_URL": "smtps://t4teld1:anuragnagar@smtp.gmail.com:465"
+     } 
+  }
+}
+

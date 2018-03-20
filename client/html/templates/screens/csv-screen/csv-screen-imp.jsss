@@ -1,0 +1,668 @@
+CR="\\r";
+Template.csv_screen.events({
+"click .btn2":function(e,tpl){
+/*
+if (Meteor.isCordova) {
+document.addEventListener("deviceready", function(){
+window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function(dir) {
+	dir.getFile("myfile.txt", {create:true}, function(fileEntry) {
+            // The file has been succesfully created. Use fileEntry to read the content or delete the file
+	});
+});
+});
+}
+*/
+},
+"click .btn1":function(e,tpl){
+Meteor.call("getCSVData",{no_of_days:8,company_id:Session.get("company_id_to_subscribe")},function(err,res){
+hide_loader()
+if(!err)
+{
+Session.set("CSVData",res);
+//============================================================================================
+var data=Session.get("CSVData");
+//****************** Start 4.8.2.1.1 ****************
+DriverLastName=data[0].form?data[0].form.driver.split(" ")[1]:"null"
+DriverFirstName=data[0].form?data[0].form.driver.split(" ")[0]:"null"
+ELDUsernameForDriver=data[0].user?data[0].user.email:"null"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+var state=StateList.findOne({_id:data[0].user.state_id})
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+DriverLicenseIssuingState=state?state.state:"null"
+DriverLicenseNumber=data[0].user?data[0].user.driver_licence_no:"null"
+
+CoDriverLastName=data[0].form?data[0].form.co_drivers:"null"
+CoDriverFirstName=data[0].form?data[0].form.co_drivers:"null"
+ELDUsernameForCoDriver=data[0].form?data[0].form.co_drivers:"null"
+
+CMVPowerUnitNumber="null";
+CMVVIN="null";
+TrailerNumber=data[0].dvir?data[0].dvir.trailer_no:"null"
+
+CarrierUSDOTNumber=data[0].cdp?data[0].cdp.company_profile.usdot_no:"null"
+CarrierName=data[0].cdp?data[0].cdp.company_profile.company_name:"null"
+MultidayBasisUsed="null"
+TwentyFourHourPeriodStartingTime="null"
+TimeZoneOffsetFromUTC="null"
+
+ShippingDocumentNumber="null"
+ExemptDriverConfiguration=data[0].cdp?data[0].cdp.company_profile.exempt_driver_configuration:"null"
+
+Current_Date=getTime();
+Current_Time=getDate()
+CurrentLatitude="null"
+CurrentLongitude="null"
+CurrentTotalVehicleMiles="null"
+CurrentTotalEngineHours="null"
+
+ELDRegistrationID="null"
+ELDIdentifier="null"
+ELDAuthenticationValue="null"
+OutputFileComment=data[0].sign?data[0].sign.output_file_comment:"null"
+
+
+//****************** End 4.8.2.1.1  ****************
+
+
+
+//****************** Start 4.8.2.1.2 ****************
+
+UserList=[
+{
+AssignedUserOrderNumber:"null",
+UserELDAccountType:"null",
+UserLastName:"null",
+UserFirstName:"null"
+},
+{
+AssignedUserOrderNumber:"null",
+UserELDAccountType:"null",
+UserLastName:"null",
+UserFirstName:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.2  *****************
+
+
+//****************** Start 4.8.2.1.3 ****************
+
+CMVList=[
+{
+AssignedCMVOrderNumber:"null",
+CMVPowerUnitNumber:"null",
+CMVVIN:"null"
+},
+{
+AssignedCMVOrderNumber:"null",
+CMVPowerUnitNumber:"null",
+CMVVIN:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.3  *****************
+
+
+//****************** Start 4.8.2.1.4 ****************
+
+
+if(data[0].events.length){
+	var obj={}
+	var eld_array=[]
+		for(var i=0;i<data[0].events.length;i++)
+		{
+			var e=data[0].events[i]
+			obj={
+				EventSequenceIDNumber:e.seqId?e.seqId:"null",
+				EventRecordStatus:e.recordStatus?e.recordStatus:"null",
+				EventRecordOrigin:e.recordOrigin?e.recordOrigin:"null",
+				EventType:e.type?e.type:"null",
+				EventCode:e.code?e.code:"null",
+				EventDate:e.date?e.date:"null",
+				EventTime:e.time?e.time:"null",
+				AccumulatedVehicleMiles:e.vehicleMiles?e.vehicleMiles:"null",
+				ElapsedEngineHours:e.engineHour?e.engineHour:"null",
+				EventLatitude:e.latituede.current?e.latituede.current:"null",
+				EventLongitude:e.longitude.current?e.longitude.current:"null",
+				DistanceSinceLastValidCoordinates:"null",
+				CorrespondingCMVOrderNumber:"null",
+				UserOrderNumberForRecordOriginator:"null",
+				MalfunctionIndicatorStatusForELD:"null",
+				DataDiagnosticEventIndicatorStatusForDriver:"null"
+				}
+			eld_array.push(obj)
+		}
+		ELDEventList=eld_array;
+			
+	}
+
+ 
+
+
+ 
+ 
+
+//****************** End 4.8.2.1.4  *****************
+
+
+
+//****************** Start 4.8.2.1.5 ****************
+EventAnnotationsCommentsDriverLocationDescription=[
+{
+EventSequenceIDNumber:"null",
+ELDUsernameOfTheRecordOriginator:"null",
+EventCommentTextOrAnnotation:"null",
+EventDate:"null",
+EventTime:"null",
+DriverLocationDescription:"null"
+},
+{
+EventSequenceIDNumber:"null",
+ELDUsernameOfTheRecordOriginator:"null",
+EventCommentTextOrAnnotation:"null",
+EventDate:"null",
+EventTime:"null",
+DriverLocationDescription:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.5  *****************
+
+
+
+//****************** Start 4.8.2.1.6 ****************
+ELDEventListForDriverCertificationOfOwnRecords=[
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+EventDate:"null",
+EventTime:"null",
+DateOfTheCertifiedRecord:"null",
+CorrespondingCMVOrderNumber:"null"
+},
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+EventDate:"null",
+EventTime:"null",
+DateOfTheCertifiedRecord:"null",
+CorrespondingCMVOrderNumber:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.6  *****************
+
+
+
+//****************** Start 4.8.2.1.7 ****************
+MalfunctionAndDiagnosticEventRecords=[
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+MalfunctionDiagnosticCode:"null",
+EventDate:"null",
+EventTime:"null",
+TotalVehicleMiles:"null",
+TotalEngineHours:"null",
+CorrespondingCMVOrderNumber:"null"
+},
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+MalfunctionDiagnosticCode:"null",
+EventDate:"null",
+EventTime:"null",
+TotalVehicleMiles:"null",
+TotalEngineHours:"null",
+CorrespondingCMVOrderNumber:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.7  *****************
+
+
+//****************** Start 4.8.2.1.8 ****************
+
+ELDLoginLogoutReport=[
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+ELDUsername:"null",
+EventDate:"null",
+EventTime:"null",
+TotalVehicleMiles:"null",
+TotalEngineHours:"null"
+},
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+ELDUsername:"null",
+EventDate:"null",
+EventTime:"null",
+TotalVehicleMiles:"null",
+TotalEngineHours:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.8  *****************
+
+
+//****************** Start 4.8.2.1.9 ****************
+CMVEnginePowerUpAndShutDownActivity=[
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+EventDate:"null",
+EventTime:"null",
+TotalVehicleMiles:"null",
+TotalEngineHours:"null",
+EventLatitude:"null",
+EventLongitude:"null",
+CMVPowerUnitNumber:"null",
+CMVVIN:"null",
+TrailerNumber:"null",
+ShippingDocumentNumber:"null"
+},
+{
+EventSequenceIDNumber:"null",
+EventCode:"null",
+EventDate:"null",
+EventTime:"null",
+TotalVehicleMiles:"null",
+TotalEngineHours:"null",
+EventLatitude:"null",
+EventLongitude:"null",
+CMVPowerUnitNumber:"null",
+CMVVIN:"null",
+TrailerNumber:"null",
+ShippingDocumentNumber:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.9  *****************
+ 
+
+
+
+//****************** Start 4.8.2.1.10 ****************
+ELDEventLogListForTheUnidentifiedDriverProfile=[
+{
+EventSequenceIDNumber:"null",
+EventRecordStatus:"null",
+EventRecordOrigin:"null",
+EventType:"null",
+EventCode:"null",
+EventDate:"null",
+EventTime:"null",
+AccumulatedVehicleMiles:"null",
+ElapsedEngineHours:"null",
+EventLatitude:"null",
+EventLongitude:"null",
+DistanceSinceLastValidCoordinates:"null",
+CorrespondingCMVOrderNumber:"null",
+MalfunctionIndicatorStatusForELD:"null"
+},
+{
+EventSequenceIDNumber:"null",
+EventRecordStatus:"null",
+EventRecordOrigin:"null",
+EventType:"null",
+EventCode:"null",
+EventDate:"null",
+EventTime:"null",
+AccumulatedVehicleMiles:"null",
+ElapsedEngineHours:"null",
+EventLatitude:"null",
+EventLongitude:"null",
+DistanceSinceLastValidCoordinates:"null",
+CorrespondingCMVOrderNumber:"null",
+MalfunctionIndicatorStatusForELD:"null"
+}]
+
+ 
+
+//****************** End 4.8.2.1.10  *****************
+ 
+//============================================================================================
+
+
+var csv_string="ELD File Header Segment:"+CR;
+var str="";
+var str1="";
+var str2="";
+var lineDataCheckArray=[];
+
+
+/********************** 4.8.2.1.1 ***************************************/
+str=clean(DriverLastName)+","+clean(DriverFirstName)+","+clean(ELDUsernameForDriver)
+		+","+clean(DriverLicenseIssuingState)+","+clean(DriverLicenseNumber);
+	var ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+
+str=clean(CoDriverLastName)+","+clean(CoDriverFirstName)+","+clean(ELDUsernameForCoDriver)
+
+ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+
+str=clean(CMVPowerUnitNumber)+","+clean(CMVVIN)+","+clean(TrailerNumber)
+
+ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+ 
+
+str=clean(CarrierUSDOTNumber)+","+clean(CarrierName)+","+clean(MultidayBasisUsed)
+	+","+clean(TwentyFourHourPeriodStartingTime)+","+clean(TimeZoneOffsetFromUTC)
+	
+
+ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+
+
+str=clean(ShippingDocumentNumber)+","+clean(ExemptDriverConfiguration)
+
+ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+
+
+
+str=clean(Current_Date)+","+clean(Current_Time)+","+clean(CurrentLatitude)+","+clean(CurrentLongitude)
+	+","+clean(CurrentTotalVehicleMiles)+","+clean(CurrentTotalEngineHours)
+	
+ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+
+
+
+str=clean(ELDRegistrationID)+","+clean(ELDIdentifier)
+	+","+clean(ELDAuthenticationValue)+","+clean(OutputFileComment)
+ldc=getLineDataCheck(str);	
+csv_string=csv_string+str+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+document.write(csv_string);
+return
+/****************28****** end 4.8.2.1.1 ***************************************/
+
+
+/********************** start 4.8.2.1.2***************************************/
+
+str="User List:"+CR
+for(var i=0;i<UserList.length;i++)
+{
+ 
+str1=clean(UserList[i].AssignedUserOrderNumber)+","+clean(UserList[i].UserELDAccountType)+","+clean(UserList[i].UserLastName)
+		+","+clean(UserList[i].UserFirstName)	
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+}		
+csv_string=csv_string+str+str2
+str2="";
+
+/********************** end 4.8.2.1.2 ***************************************/
+
+/********************** start 4.8.2.1.3***************************************/
+
+str="CMV List:"+CR
+for(var i=0;i<CMVList.length;i++)
+{
+str1=clean(CMVList[i].AssignedCMVOrderNumber)+","+clean(CMVList[i].CMVPowerUnitNumber)+","
+	+clean(CMVList[i].CMVVIN)
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+/********************** end 4.8.2.1.3 ***************************************/
+
+/********************** start 4.8.2.1.4***************************************/
+
+str="ELD Event List:"+CR
+for(var i=0;i<ELDEventList.length;i++)
+{
+console.log("a")
+str1=clean(ELDEventList[i].EventSequenceIDNumber)+","+clean(ELDEventList[i].EventRecordStatus)
+	+","+clean(ELDEventList[i].EventRecordOrigin)+","+clean(ELDEventList[i].EventType)
+	+","+clean(ELDEventList[i].EventCode)+","+clean(ELDEventList[i].EventDate)
+	+","+clean(ELDEventList[i].EventTime)+","+clean(ELDEventList[i].AccumulatedVehicleMiles)
+	+","+clean(ELDEventList[i].ElapsedEngineHours)+","+clean(ELDEventList[i].EventLatitude)
+	+","+clean(ELDEventList[i].EventLongitude)+","+clean(ELDEventList[i].DistanceSinceLastValidCoordinates)
+	+","+clean(ELDEventList[i].CorrespondingCMVOrderNumber)+","+clean(ELDEventList[i].UserOrderNumberForRecordOriginator)
+	+","+clean(ELDEventList[i].MalfunctionIndicatorStatusForELD)+","+clean(ELDEventList[i].DataDiagnosticEventIndicatorStatusForDriver)
+//-------------------------------------------------------------------------
+
+var EventType=clean(ELDEventList[i].EventType);console.log("b")
+var EventCode=clean(ELDEventList[i].EventCode);console.log("c")
+var EventDate=clean(ELDEventList[i].EventDate);console.log("d")
+var EventTime=clean(ELDEventList[i].EventTime);console.log("e")
+var VehicleMiles=clean(ELDEventList[i].AccumulatedVehicleMiles);
+var EngineHours=clean(ELDEventList[i].ElapsedEngineHours);
+var EventLatitude=clean(ELDEventList[i].EventLatitude);
+var EventLongitude=clean(ELDEventList[i].EventLongitude);
+var CmvNumber=clean(ELDEventList[i].CorrespondingCMVOrderNumber);
+var EldUsername=clean(Session.get("ELDUsername"));
+var dstr=EventType+EventCode+EventDate+EventTime+VehicleMiles+EngineHours+
+		+EventLatitude+EventLongitude+CmvNumber+EldUsername
+//-------------------------------------------------------------------------
+
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+getEventDataCheck(dstr)+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+}		
+csv_string=csv_string+str+str2
+str2="";
+/********************** end 4.8.2.1.4 ***************************************/
+
+
+/********************** start 4.8.2.1.5***************************************/
+EventAnnotationsCommentsDriverLocationDescription=[]
+str="ELD Event Annotations or Comments:"+CR
+for(var i=0;i<EventAnnotationsCommentsDriverLocationDescription.length;i++)
+{
+str1=clean(EventAnnotationsCommentsDriverLocationDescription[i].EventSequenceIDNumber)
+	+","+clean(EventAnnotationsCommentsDriverLocationDescription[i].ELDUsernameOfTheRecordOriginator)
+	+","+clean(EventAnnotationsCommentsDriverLocationDescription[i].EventCommentTextOrAnnotation)
+	+","+clean(EventAnnotationsCommentsDriverLocationDescription[i].EventDate)
+	+","+clean(EventAnnotationsCommentsDriverLocationDescription[i].EventTime)
+	+","+clean(EventAnnotationsCommentsDriverLocationDescription[i].DriverLocationDescription)
+
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);	
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+
+/********************** end 4.8.2.1.5 ***************************************/
+
+
+/********************** start 4.8.2.1.6***************************************/
+ 
+str="Driver’s Certification/Recertification Actions:"+CR
+for(var i=0;i<ELDEventListForDriverCertificationOfOwnRecords.length;i++)
+{
+str1=clean(ELDEventListForDriverCertificationOfOwnRecords[i].EventSequenceIDNumber)
+	+","+clean(ELDEventListForDriverCertificationOfOwnRecords[i].EventCode)
+	+","+clean(ELDEventListForDriverCertificationOfOwnRecords[i].EventDate)
+	+","+clean(ELDEventListForDriverCertificationOfOwnRecords[i].EventTime)
+	+","+clean(ELDEventListForDriverCertificationOfOwnRecords[i].DateOfTheCertifiedRecord)
+	+","+clean(ELDEventListForDriverCertificationOfOwnRecords[i].CorrespondingCMVOrderNumber)
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+ 
+/********************** end 4.8.2.1.6 ***************************************/
+
+
+/********************** start 4.8.2.1.7***************************************/
+ 
+str="Malfunctions and Data Diagnostic Events:"+CR
+for(var i=0;i<MalfunctionAndDiagnosticEventRecords.length;i++)
+{
+str1=clean(MalfunctionAndDiagnosticEventRecords[i].EventSequenceIDNumber)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].EventCode)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].MalfunctionDiagnosticCode)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].EventDate)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].EventTime)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].TotalVehicleMiles)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].TotalEngineHours)
+	+","+clean(MalfunctionAndDiagnosticEventRecords[i].CorrespondingCMVOrderNumber)
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+ 
+/********************** end 4.8.2.1.7 ***************************************/
+
+
+/********************** start 4.8.2.1.8***************************************/
+ 
+str="ELD Login/Logout Report:"+CR
+for(var i=0;i<ELDLoginLogoutReport.length;i++)
+{
+str1=clean(ELDLoginLogoutReport[i].EventSequenceIDNumber)
+	+","+clean(ELDLoginLogoutReport[i].EventCode)
+	+","+clean(ELDLoginLogoutReport[i].ELDUsername)
+	+","+clean(ELDLoginLogoutReport[i].EventDate)
+	+","+clean(ELDLoginLogoutReport[i].EventTime)
+	+","+clean(ELDLoginLogoutReport[i].TotalVehicleMiles)
+	+","+clean(ELDLoginLogoutReport[i].TotalEngineHours)
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+ 
+/********************** end 4.8.2.1.8 ***************************************/
+
+
+/********************** start 4.8.2.1.9***************************************/
+ 
+str="CMV Engine Power-Up and Shut Down Activity:"+CR
+for(var i=0;i<CMVEnginePowerUpAndShutDownActivity.length;i++)
+{
+str1=clean(CMVEnginePowerUpAndShutDownActivity[i].EventSequenceIDNumber)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].EventCode)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].EventDate)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].EventTime)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].TotalVehicleMiles)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].TotalEngineHours)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].EventLatitude)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].EventLongitude)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].CMVPowerUnitNumber)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].CMVVIN)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].TrailerNumber)
+	+","+clean(CMVEnginePowerUpAndShutDownActivity[i].ShippingDocumentNumber)
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+ 
+/********************** end 4.8.2.1.9 ***************************************/
+
+
+/********************** start 4.8.2.1.10***************************************/
+
+str="Unidentified Driver Profile Records:"+CR
+ 
+for(var i=0;i<ELDEventLogListForTheUnidentifiedDriverProfile.length;i++)
+{
+str1=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventSequenceIDNumber)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventRecordStatus)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventRecordOrigin)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventType)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventCode)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventDate)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventTime)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].AccumulatedVehicleMiles)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].ElapsedEngineHours)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventLatitude)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventLongitude)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].DistanceSinceLastValidCoordinates)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].CorrespondingCMVOrderNumber)
+	+","+clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].MalfunctionIndicatorStatusForELD)
+	
+//-------------------------------------------------------------------------
+var EventType=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventType);
+var EventCode=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventCode);
+var EventDate=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventDate);
+var EventTime=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventTime);
+var VehicleMiles=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].AccumulatedVehicleMiles);
+var EngineHours=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].ElapsedEngineHours);
+var EventLatitude=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventLatitude);
+var EventLongitude=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].EventLongitude);
+var CmvNumber=clean(ELDEventLogListForTheUnidentifiedDriverProfile[i].CorrespondingCMVOrderNumber);
+var EldUsername=clean(Session.get("ELDUsername"));
+var dstr=EventType+EventCode+EventDate+EventTime+VehicleMiles+EngineHours+
+		+EventLatitude+EventLongitude+CmvNumber+EldUsername
+//-------------------------------------------------------------------------
+ldc=getLineDataCheck(str1);	
+str2=str2+str1+","+getEventDataCheck(dstr)+","+ldc+CR;
+lineDataCheckArray.push(ldc);
+
+}		
+csv_string=csv_string+str+str2
+str2="";
+ 
+/********************** end 4.8.2.1.10 ***************************************/
+
+
+/********************** start 4.8.2.1.11 ***************************************/
+var sum=addHex(lineDataCheckArray);
+str="End of File:"+CR
+str=str+getFileDataCheck(sum)+CR
+
+csv_string=csv_string+str
+/********************** end 4.8.2.1.11 ***************************************/
+document.write(csv_string);
+Session.set("csv_string",csv_string);
+}
+else
+show_toast(err)
+});
+}
+})
+
+Template.csv_screen.helpers({
+"csv_string":function(){
+return Session.get("csv_string");
+}
+})
+
+
+ 

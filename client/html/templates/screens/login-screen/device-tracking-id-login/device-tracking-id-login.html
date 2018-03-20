@@ -1,0 +1,25 @@
+<template name="device_tracking_id_login">
+  {{>navbar title="Register The Device" left="back_icon" internal=true right="ellipsis_icon"}}
+ <form name="device_tracking_id_login">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input id="dti" type="text" name="dti">
+                <label for="icon_prefix">Device Tracking ID</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">lock</i>
+                <input id="password" type="password" name="password">
+                <label for="icon_telephone">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn purple darken-4 waves-effect waves-light" type="submit" name="action">Register The Device</button>
+            </div>
+        </div>
+    </form>
+
+</template>

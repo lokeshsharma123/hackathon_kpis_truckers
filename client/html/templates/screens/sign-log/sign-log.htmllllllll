@@ -1,0 +1,46 @@
+<template name="sign_log">
+    <div class="container">
+	 
+	{{#unless show_canvas}}
+	{{>use_prev_sign}}
+	{{/unless}}
+	{{#if sign}}
+	{{#unless show_canvas}}
+	<a id="create_new_sign_button" class="btn secondary">Create a new one</a>
+	{{/unless}}
+	{{#if show_canvas}}
+        {{>disclaimer}}
+		 <br />
+		  <p>
+      <input type="checkbox" id="test5" />
+      <label for="test5">AGREE</label>
+    </p>
+        <br/>
+        <br/>
+        <div class="js-signature" data-auto-fit="true" data-background="#ffffff" data-border="1px solid #dddddd" data-height="200" data-line-color="#333333" data-width="600">
+        </div>
+        <br/>
+        <a class="clear_signature">
+            Clear Signature
+        </a>
+	{{/if}}
+	{{else}}
+	
+	    {{>disclaimer}}
+		<br />
+		 <p>
+      <input type="checkbox" id="test5" />
+      <label for="test5">AGREE</label>
+    </p>
+		<br/>
+        <br/>
+        <div class="js-signature" data-auto-fit="true" data-background="#ffffff" data-border="1px solid #dddddd" data-height="200" data-line-color="#333333" data-width="600">
+        </div>
+        <br/>
+        <a class="clear_signature">
+            Clear Signature
+        </a>
+	{{/if}}
+	
+    </div>
+</template>

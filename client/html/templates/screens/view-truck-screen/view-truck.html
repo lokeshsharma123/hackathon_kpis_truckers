@@ -1,0 +1,53 @@
+<template name="view_truck_screen">
+    {{>navbar left='back_icon' title="Truck Details" right=option internal=true}}
+     <div class="row">
+                <div class="input-field col s6">
+                    <label>Truck No.</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label> {{truck.vehicle_no}}</label>
+                </div>
+            </div> 
+	 	 <div class="row">
+                <div class="input-field col s6">
+                    <label>Year</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{truck.year}}</label>
+                </div>
+            </div>
+           <div class="row">
+                <div class="input-field col s6">
+                    <label>Ride Type</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{truck.ride_type}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Type</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{truck.type}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Length</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{truck.length}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Doors</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{truck.doors}}</label>
+                </div>
+            </div>
+			 
+	
+	</template>

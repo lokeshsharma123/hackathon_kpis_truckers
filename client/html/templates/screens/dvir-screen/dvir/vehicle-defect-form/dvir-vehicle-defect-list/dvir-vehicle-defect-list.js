@@ -1,0 +1,13 @@
+Template.dvir_vehicle_defect_list.helpers({
+"defects":function(){
+	var defect=DVIRVehicleDefect.find({userid:Meteor.userId(),company_id:Session.get("company_id_to_subscribe"),date:Session.get("CurrentDate").toDateString()}).fetch()
+	if(defect.length)
+	return defect
+	}
+})
+Template.dvir_vehicle_defect_list.events({
+"click .delete_button":function(e,tpl){
+Meteor.call("removeDVIRVehicleDefect",this._id,function(err,res){
+});
+}
+});

@@ -1,0 +1,168 @@
+<template name="register">
+    {{>navbar title="Driver Registration Form" left="Cancel" right=option internal=true}}
+ 
+        <form>
+		 <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Email" id="email" type="text" class="validate">
+                    <label for="last_name">Email</label>
+                </div>
+           
+                <div class="input-field col s6">
+                    <input placeholder="Password" id="password" type="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="First Name" id="first_name" type="text" class="validate">
+                    <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Last Name" id="last_name" type="text" class="validate">
+                    <label for="last_name">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Licence No" id="driver_licence_no" type="text" class="validate">
+                    <label for="driver_licence_no">Licence No.</label>
+                </div>
+          
+			 <div class="input-field col s6">
+                 	<select id="state_id" class="browser-default">
+                        <option value="select" disabled selected>State</option>
+                        {{#each state_list}}
+						<option value="{{_id}}" >{{state}}</option>
+						{{/each}}
+                    </select>
+					 
+                </div>
+				  </div>
+				   <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Class" id="class" type="text" class="validate">
+                    <label for="class">Class</label>
+                </div>
+				<!--
+				 <div class="input-field col s6">
+                    <input placeholder="Expiration(dd-mm-yy)" id="expiration" type="text" class="validate">
+                    <label for="expiration">Expiration(dd-mm-yy)</label>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Phone" id="phone" type="text" class="validate">
+                    <label for="phone">Phone</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="home_address" class="materialize-textarea"></textarea>
+          <label for="home_address">Home Address</label>
+                </div>
+            </div>
+				<!-- <div class="row">
+				 <div class="col s12">
+			  <div class="file-field input-field">
+      <div class="btn">
+	  <span><i class="material-icons">attach_file</i></span>
+        <input type="file" id="mvr_doc">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload mvr doc">
+      </div>
+    </div>
+	</div>
+	</div>
+	 <div class="row">
+				 <div class="col s12">
+			  <div class="file-field input-field">
+      <div class="btn">
+	  <span><i class="material-icons">attach_file</i></span>
+        <input type="file" id="licence">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload licence">
+      </div>
+    </div>
+	</div>
+	</div>
+		 <div class="row">
+				 <div class="col s12">
+			  <div class="file-field input-field">
+      <div class="btn">
+	  <span><i class="material-icons">attach_file</i></span>
+        <input type="file" id="medical_card">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload medical card">
+      </div>
+    </div>
+	</div>
+	</div>
+	 <div class="row">
+				 <div class="col s12">
+			  <div class="file-field input-field">
+      <div class="btn">
+	  <span><i class="material-icons">attach_file</i></span>
+        <input type="file" id="selfie">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload Selfie">
+      </div>
+    </div>
+	</div>
+	</div>
+           -->
+           <!-- <div class="row">
+                <div class="input-field col s12">
+                    
+					<select id="company_id" class="browser-default">
+                        <option value="select" disabled selected>Choose your Company Name</option>
+                        {{#each company_name_list}}
+						<option value="{{_id}}" >{{company_name}}</option>
+						{{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Main Office Address" id="mainoffice" type="text" class="validate">
+                    <label for="mainoffice">Main Office Address</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Terminal Address" id="terminal" type="text" class="validate">
+                    <label for="terminal">Terminal Address</label>
+                </div>
+				
+            </div>
+			<div class="row">
+			 <div class="input-field col s12">
+                  
+					<select id="cargo_type" class="browser-default">
+                        <option value="select" disabled selected>Choose your Cargo Type</option>
+                        {{#each cargo_type_list}}
+						<option value="{{_id}}" >{{cargo_type}}</option>
+						{{/each}}
+                    </select>
+		 
+                </div>
+				  </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="httz" class="browser-default">
+                        <option value="select" disabled selected>Choose your Home Terminal Time Zone</option>
+                         {{#each httz_list}}
+						<option value="{{_id}}">{{timezone}}</option>
+						 {{/each}}
+                    </select>
+ 
+                </div>
+            </div>
+            -->
+        </form>
+ 
+</template>

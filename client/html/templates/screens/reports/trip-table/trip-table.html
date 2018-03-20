@@ -1,0 +1,139 @@
+<template name="trip_table">
+<style type="text/css">
+.roww {border-bottom:1px solid #C0C0C0;margin-bottom:0px;border-right:1px solid #C0C0C0;border-left:1px solid #C0C0C0;}
+</style>
+<div class="row"><div class="col s12 center-align"><h6><b>Trip Information</b></h6></div></div>
+
+<div class="row roww" style="border-top:1px solid #C0C0C0">
+<div class="col s4">
+<b>Record Date</b><br />{{convertTripDate data.date }}
+</div>
+<div class="col s4">
+<b>USDOT#</b><br />{{data.cdp.company_profile.usdot_no}}
+</div>
+<div class="col s4">
+<b>Driver License Number</b><br />{{data.cdp.driver_profile.driver_licence_no}}
+</div>
+</div>
+
+
+
+<div class="row roww">
+<div class="col s4">
+<b>Driver License State</b><br />{{getStateCode data.cdp.driver_profile.state_name}}
+</div>
+<div class="col s4">
+<b>AOBRD ID</b><br /><!-- {{data.cdp.tracking_id}} -->BE_AOBRD_2
+</div>
+<div class="col s4">
+<b>Trailer ID</b><br />{{data.dvir.trailer_no}}
+</div>
+</div>
+
+<div class="row roww">
+<div class="col s4">
+<b>Time Zone</b><br />{{getCompanyTimeZone data.cdp.company_profile.httz}}
+</div>
+<div class="col s4">
+<b>Driver Name</b><br />{{data.cdp.driver_profile.first_name}} {{data.cdp.driver_profile.last_name}}
+</div>
+<div class="col s4">
+<b>Co-Driver Name</b><br />{{data.form.co_drivers}}
+</div>
+</div>
+
+
+
+<div class="row roww">
+<div class="col s4">
+<b>AOBRD Manufacturer</b><br />
+Blue Epsilon,LLC
+</div>
+<div class="col s4">
+<b>Shipping ID</b><br />{{data.form.shipping_documents}}
+
+</div>
+<div class="col s4">
+<b>24 Period Starting Time</b><br />000000
+
+</div>
+
+<!--<div class="col s12 m12 l4">
+<div class="col s6">
+<b>Unidentified Driver Records</b><br />
+
+</div>
+<div class="col s6">
+<b>ELD Malfunction Indicators</b><br />
+
+</div>
+
+</div>-->
+</div>
+
+
+
+<div class="row roww">
+<div class="col s4">
+<b>Co-Driver ID</b><br />
+</div>
+<div class="col s4">
+<b>Truck Tractor ID</b><br />{{data.dvir.vehicle_no}}
+</div>
+<div class="col s4">
+<b>Driver ID</b><br />{{data.user.username}}
+</div>
+
+</div>
+
+
+<div class="row roww">
+<div class="col s4">
+<b>Carrier</b><br />{{data.cdp.company_profile.company_name}}
+</div>
+<div class="col s4">
+<b>Current Location</b><br />{{data.location}}
+</div>
+<!--<div class="col s6">
+<b>Start-End Odometer</b><br />{{data.odometer}}
+
+</div>-->
+<div class="col s4">
+<b>Miles Today</b><br />
+{{data.odometer}}
+</div>
+<!--<div class="col s6">
+<b>Start End Engine Hours</b><br />{{data.engine_hour}}
+
+</div>-->
+</div>
+
+
+<div class="row roww">
+<div class="col s4">
+<b>Truck Tractor VIN</b><br />
+{{data.dvir.vin_no}}
+</div>
+
+<div class="col s4">
+<b>Exempt Driver Status</b><br />{{#if equals data.cdp.profile_by_company.exempt_driver_configuration "E"}}Exempted {{else}} No exemption{{/if}}
+
+</div>
+<div class="col s4">
+<b>Print Display Date</b><br />{{convertTripDate current_date}}
+</div>
+</div>
+
+
+
+<!-- <div class="row roww">
+<div class="col s6">
+<b>Current Location</b><br />{{data.location}} 
+</div>
+
+<div class="col s6">
+<b>Print Display Date</b><br />{{convertTripDate current_date}}
+</div>
+</div> -->
+
+</template>

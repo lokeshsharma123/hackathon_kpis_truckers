@@ -1,0 +1,23 @@
+<template name="vehicle_defect_form">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="vehicle_no" placeholder="Truck/Tractor Number" type="text" value="{{value}}"/>
+                    <label class="active" for="vehicles">
+                        Truck/Tractor Number
+                    </label>
+					<i class="material-icons prefix error_alert hidden" id="error_vehicle_no">&#xE001;</i>
+                </div>
+				<div class="input-field col s12">
+                    <input id="vin_no" placeholder="VIN No." type="text" maxlength="17" value="{{vin_no}}"/>
+                    <label class="active" for="vin_no">
+                        VIN No.
+                    </label>
+					<i class="material-icons prefix error_alert hidden" id="error_vin_no">&#xE001;</i>
+                </div>
+            </div>
+        </form>
+    </div>
+   {{>dvir_vehicle_defect_list}}
+</template>

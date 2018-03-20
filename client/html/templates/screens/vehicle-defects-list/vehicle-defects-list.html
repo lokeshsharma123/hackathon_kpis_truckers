@@ -1,0 +1,15 @@
+<template name="vehicle_defects_list">
+    {{>navbar title="Vehicle Defects" left="Cancel" right=option internal=true}}
+    <form action="#">
+        <ul class="collection" style="border-top:0px">
+            {{#each vehicle_defects}}
+            <li class="collection-item">
+                <input class="browser-default defect" id="{{this._id}}" defect="{{this.defect}}" type="checkbox"/>
+                <label class="black-text" for="{{this._id}}">
+                    {{this.defect}}
+                </label>
+            </li>
+            {{/each}}
+        </ul>
+    </form>
+</template>

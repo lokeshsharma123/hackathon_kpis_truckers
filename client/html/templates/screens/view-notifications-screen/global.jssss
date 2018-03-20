@@ -1,0 +1,314 @@
+validate_csv_fields=function validate_csv_fields(data){
+
+
+//****************** Start 4.8.2.1.1 ****************
+DriverLastName=csvValidateDE_30(data[0].form?data[0].form.driver.split(" ")[1]:"")
+DriverFirstName=csvValidateDE_28(data[0].form?data[0].form.driver.split(" ")[0]:"")
+ELDUsernameForDriver=csvValidateDE_18(data[0].user?data[0].user.email:"")
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+var state
+if(data[0].cdp)
+state=StateList.findOne({_id:data[0].cdp.state_id})
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+DriverLicenseIssuingState=state?state.state:""
+DriverLicenseNumber=csvValidateDE_10(data[0].cdp?data[0].cdp.driver_licence_no:"")
+
+CoDriverLastName=csvValidateDE_30(data[0].form?data[0].form.co_drivers.split(" ")[1]:"")
+CoDriverFirstName=csvValidateDE_28(data[0].form?data[0].form.co_drivers.split(" ")[0]:"")
+ELDUsernameForCoDriver=csvValidateDE_18(data[0].form?data[0].form.co_drivers.split(" ")[0]:"")//doubt
+
+CMVPowerUnitNumber=csvValidateDE_4("012CMV");//missing
+CMVVIN=csvValidateDE_5("1FUJGHDV0CLBP8834");//missing
+TrailerNumber=csvValidateDE_42(data[0].dvir?data[0].dvir.trailer_no:"")
+
+CarrierUSDOTNumber=csvValidateDE_3("1000003")//missing
+CarrierName=csvValidateDE_2(data[0].cdp?data[0].cdp.company_profile.company_name:"")
+MultidayBasisUsed=csvValidateDE_36("7")//missing
+TwentyFourHourPeriodStartingTime=csvValidateDE_1("200921")//missing
+TimeZoneOffsetFromUTC=csvValidateDE_41("05")//doubt
+
+ShippingDocumentNumber=csvValidateDE_39(data[0].form?data[0].form.shipping_documents:"")//doubt
+ExemptDriverConfiguration=csvValidateDE_26(data[0].cdp?data[0].cdp.company_profile.exempt_driver_configuration:"")
+
+Current_Date=csvValidateDE_8("092117")//doubt
+Current_Time=csvValidateDE_40("213709")//doubt
+CurrentLatitude=csvValidateDE_31("-15.68")//missing
+CurrentLongitude=csvValidateDE_33("-157.8")//missing
+CurrentTotalVehicleMiles=csvValidateDE_43("998")//missing
+CurrentTotalEngineHours=csvValidateDE_19("346.1")//missing
+
+ELDRegistrationID=csvValidateDE_17("ZA10")//missing
+ELDIdentifier=csvValidateDE_15("1001ZE")//missing
+ELDAuthenticationValue=csvValidateDE_14("D3A4506EC8FF566B506EC8FF")//missing
+OutputFileComment=csvValidateDE_38(data[0].sign?data[0].sign.output_file_comment:"")
+
+
+//****************** End 4.8.2.1.1  ****************
+
+
+
+//****************** Start 4.8.2.1.2 ****************
+
+UserList=[
+{
+AssignedUserOrderNumber:csvValidateDE_37("1"),//missing
+UserELDAccountType:csvValidateDE_13("D"),//doubt
+UserLastName:csvValidateDE_30(DriverLastName),//doubt
+UserFirstName:csvValidateDE_28(DriverFirstName)//doubt
+},
+{
+AssignedUserOrderNumber:csvValidateDE_37("2"),//missing
+UserELDAccountType:csvValidateDE_13("D"),//doubt
+UserLastName:csvValidateDE_30(DriverLastName),//doubt
+UserFirstName:csvValidateDE_28(DriverFirstName)//doubt
+}]
+
+ 
+
+//****************** End 4.8.2.1.2  *****************
+
+
+//****************** Start 4.8.2.1.3 ****************
+
+CMVList=[
+{
+AssignedCMVOrderNumber:csvValidateDE_37("25"),//missing
+CMVPowerUnitNumber:csvValidateDE_4("012CMV"),//missing
+CMVVIN:csvValidateDE_5("1FUJGHDV0CLBP883wqe4")//missing
+},
+{
+AssignedCMVOrderNumber:csvValidateDE_37("26"),//missing
+CMVPowerUnitNumber:csvValidateDE_4("012CMV"),//missing
+CMVVIN:csvValidateDE_5("1FUJGHDV0CLBP883wqe4")//missing
+}]
+
+ 
+
+//****************** End 4.8.2.1.3  *****************
+
+
+//****************** Start 4.8.2.1.4 ****************
+
+
+if(data[0].events.length){
+	var obj={}
+	var eld_array=[]
+		for(var i=0;i<data[0].events.length;i++)
+		{
+			var e=data[0].events[i]
+			obj={
+				EventSequenceIDNumber:csvValidateDE_24(e.seqId?e.seqId:""),
+				EventRecordStatus:csvValidateDE_23(e.recordStatus?e.recordStatus:""),
+				EventRecordOrigin:csvValidateDE_22(e.recordOrigin?e.recordOrigin:""),
+				EventType:csvValidateDE_25(e.type?e.type:""),
+				EventCode:csvValidateDE_20(e.code?e.code:""),
+				EventDate:csvValidateDE_8(e.date?e.date:""),
+				EventTime:csvValidateDE_40(e.time?e.time:""),
+				AccumulatedVehicleMiles:csvValidateDE_43(e.vehicleMiles?e.vehicleMiles:""),
+				ElapsedEngineHours:csvValidateDE_19(e.engineHour?e.engineHour:""),
+				EventLatitude:csvValidateDE_31(e.latituede.current?e.latituede.current:""),
+				EventLongitude:csvValidateDE_33(e.longitude.current?e.longitude.current:""),
+				DistanceSinceLastValidCoordinates:csvValidateDE_9("2"),//missing
+				CorrespondingCMVOrderNumber:csvValidateDE_37("13"),//missing
+				UserOrderNumberForRecordOriginator:csvValidateDE_37("2"),//missing
+				MalfunctionIndicatorStatusForELD:csvValidateDE_35("1"),//missing
+				DataDiagnosticEventIndicatorStatusForDriver:csvValidateDE_7("1")//missing
+				}
+			eld_array.push(obj)
+		}
+		ELDEventList=eld_array;
+			
+	}
+
+ 
+
+
+ 
+ 
+
+//****************** End 4.8.2.1.4  *****************
+
+
+//complete section missing
+//****************** Start 4.8.2.1.5 ****************
+EventAnnotationsCommentsDriverLocationDescription=[
+{
+EventSequenceIDNumber:csvValidateDE_24("3"),
+ELDUsernameOfTheRecordOriginator:csvValidateDE_18("anurag"),
+EventCommentTextOrAnnotation:csvValidateDE_6("comment"),
+EventDate:csvValidateDE_8("092319"),
+EventTime:csvValidateDE_40("192344"),
+DriverLocationDescription:csvValidateDE_12("kota")
+},
+{
+EventSequenceIDNumber:csvValidateDE_24("4"),
+ELDUsernameOfTheRecordOriginator:csvValidateDE_18("anurag"),
+EventCommentTextOrAnnotation:csvValidateDE_6("comment"),
+EventDate:csvValidateDE_8("092319"),
+EventTime:csvValidateDE_40("192344"),
+DriverLocationDescription:csvValidateDE_12("jaipur")
+}]
+
+ 
+
+//****************** End 4.8.2.1.5  *****************
+
+
+//complete section missing
+//****************** Start 4.8.2.1.6 ****************
+ELDEventListForDriverCertificationOfOwnRecords=[
+{
+EventSequenceIDNumber:csvValidateDE_24("2"),
+EventCode:csvValidateDE_20("1"),
+EventDate:csvValidateDE_8("092117"),
+EventTime:csvValidateDE_40("200909"),
+DateOfTheCertifiedRecord:csvValidateDE_8("092117"),
+CorrespondingCMVOrderNumber:csvValidateDE_37("2")
+},
+{
+EventSequenceIDNumber:csvValidateDE_24("3"),
+EventCode:csvValidateDE_20("1"),
+EventDate:csvValidateDE_8("092117"),
+EventTime:csvValidateDE_40("200909"),
+DateOfTheCertifiedRecord:csvValidateDE_8("092117"),
+CorrespondingCMVOrderNumber:csvValidateDE_37("3")
+}]
+
+ 
+//complete section missing
+//****************** End 4.8.2.1.6  *****************
+
+
+//complete section missing
+//****************** Start 4.8.2.1.7 ****************
+MalfunctionAndDiagnosticEventRecords=[
+{
+EventSequenceIDNumber:csvValidateDE_24("4"),
+EventCode:csvValidateDE_20("2"),
+MalfunctionDiagnosticCode:csvValidateDE_34("1"),
+EventDate:csvValidateDE_8("022390"),
+EventTime:csvValidateDE_40("090908"),
+TotalVehicleMiles:csvValidateDE_43("201"),
+TotalEngineHours:csvValidateDE_19("90"),
+CorrespondingCMVOrderNumber:csvValidateDE_37("1")
+},
+{
+EventSequenceIDNumber:csvValidateDE_24("5"),
+EventCode:csvValidateDE_20("2"),
+MalfunctionDiagnosticCode:csvValidateDE_34("1"),
+EventDate:csvValidateDE_8("022390"),
+EventTime:csvValidateDE_40("090908"),
+TotalVehicleMiles:csvValidateDE_43("201"),
+TotalEngineHours:csvValidateDE_19("90"),
+CorrespondingCMVOrderNumber:csvValidateDE_37("1")
+}]
+
+ 
+
+//****************** End 4.8.2.1.7  *****************
+//complete section missing
+
+//****************** Start 4.8.2.1.8 ****************
+
+ELDLoginLogoutReport=[
+{
+EventSequenceIDNumber:csvValidateDE_24("45"),
+EventCode:csvValidateDE_20("2"),
+ELDUsername:csvValidateDE_18("anurag"),
+EventDate:csvValidateDE_8("092390"),
+EventTime:csvValidateDE_40("230309"),
+TotalVehicleMiles:csvValidateDE_43("70"),
+TotalEngineHours:csvValidateDE_19("250")
+},
+{
+EventSequenceIDNumber:csvValidateDE_24("45"),
+EventCode:csvValidateDE_20("2"),
+ELDUsername:csvValidateDE_18("anurag"),
+EventDate:csvValidateDE_8("092390"),
+EventTime:csvValidateDE_40("230309"),
+TotalVehicleMiles:csvValidateDE_43("70"),
+TotalEngineHours:csvValidateDE_19("250")
+}]
+
+ 
+
+//****************** End 4.8.2.1.8  *****************
+
+//complete section missing
+//****************** Start 4.8.2.1.9 ****************
+CMVEnginePowerUpAndShutDownActivity=[
+{
+EventSequenceIDNumber:csvValidateDE_24("1"),
+EventCode:csvValidateDE_20("2"),
+EventDate:csvValidateDE_8("042390"),
+EventTime:csvValidateDE_40("090855"),
+TotalVehicleMiles:csvValidateDE_43("23"),
+TotalEngineHours:csvValidateDE_19("45"),
+EventLatitude:csvValidateDE_31("-45.8"),
+EventLongitude:csvValidateDE_33("-179.4"),
+CMVPowerUnitNumber:csvValidateDE_4("2"),
+CMVVIN:csvValidateDE_5("23ertyuiopasdfghjk"),
+TrailerNumber:csvValidateDE_42("6677"),
+ShippingDocumentNumber:csvValidateDE_39("rt6")
+},
+{
+EventSequenceIDNumber:csvValidateDE_24("1"),
+EventCode:csvValidateDE_20("2"),
+EventDate:csvValidateDE_8("042390"),
+EventTime:csvValidateDE_40("090855"),
+TotalVehicleMiles:csvValidateDE_43("23"),
+TotalEngineHours:csvValidateDE_19("45"),
+EventLatitude:csvValidateDE_31("-45.8"),
+EventLongitude:csvValidateDE_33("-179.4"),
+CMVPowerUnitNumber:csvValidateDE_4("2"),
+CMVVIN:csvValidateDE_5("23ertyuiopasdfghjk"),
+TrailerNumber:csvValidateDE_42("6677"),
+ShippingDocumentNumber:csvValidateDE_39("rt6")
+}]
+
+ 
+
+//****************** End 4.8.2.1.9  *****************
+ 
+
+
+//complete section missing
+//****************** Start 4.8.2.1.10 ****************
+ELDEventLogListForTheUnidentifiedDriverProfile=[
+{
+EventSequenceIDNumber:csvValidateDE_24("4"),
+EventRecordStatus:csvValidateDE_23("1"),
+EventRecordOrigin:csvValidateDE_22("2"),
+EventType:csvValidateDE_25("2"),
+EventCode:csvValidateDE_20("2"),
+EventDate:csvValidateDE_8("092389"),
+EventTime:csvValidateDE_40("090809"),
+AccumulatedVehicleMiles:csvValidateDE_43("80"),
+ElapsedEngineHours:csvValidateDE_19("23"),
+EventLatitude:csvValidateDE_31("-15.8"),
+EventLongitude:csvValidateDE_33("-174.7"),
+DistanceSinceLastValidCoordinates:csvValidateDE_9("5"),
+CorrespondingCMVOrderNumber:csvValidateDE_37("23"),
+MalfunctionIndicatorStatusForELD:csvValidateDE_35("1")
+},
+{
+EventSequenceIDNumber:csvValidateDE_24("4"),
+EventRecordStatus:csvValidateDE_23("1"),
+EventRecordOrigin:csvValidateDE_22("2"),
+EventType:csvValidateDE_25("2"),
+EventCode:csvValidateDE_20("2"),
+EventDate:csvValidateDE_8("092389"),
+EventTime:csvValidateDE_40("090809"),
+AccumulatedVehicleMiles:csvValidateDE_43("80"),
+ElapsedEngineHours:csvValidateDE_19("23"),
+EventLatitude:csvValidateDE_31("-15.8"),
+EventLongitude:csvValidateDE_33("-174.7"),
+DistanceSinceLastValidCoordinates:csvValidateDE_9("5"),
+CorrespondingCMVOrderNumber:csvValidateDE_37("23"),
+MalfunctionIndicatorStatusForELD:csvValidateDE_35("1")
+}]
+
+ 
+
+//****************** End 4.8.2.1.10  *****************
+}

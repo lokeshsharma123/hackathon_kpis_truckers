@@ -1,0 +1,16 @@
+<template name="csv_screen">
+
+<!-- <button class="btn1 btn">Generate CSV</button> --><!--&nbsp;&nbsp;<button class="btn2">Save to device</button>-->
+
+ {{#if error_list}}
+	  <ul class="collection">
+	  {{#each error_list}}
+      <li class="collection-item">{{this}}</li>
+	  {{/each}}
+    </ul>
+	{{else}}
+	{{{csv_string}}}
+	{{/if}}
+<br /><br />
+<div id="div"></div>
+</template>

@@ -1,0 +1,52 @@
+<template name="reports_template">
+<div class="sub_nav_fixed blue darken-2 z-depth-2">
+<!-- {{>csv_screen}} -->
+{{#if array}}
+ <div class="row">
+	<div class="col s4">
+
+	<button class="blue darken-1 fetch8record btn waves-effect hoverable">DOT VIEW</button>
+	</div>
+	<div class="col s4 center-align">
+ <button class="blue darken-1 btn waves-effect hoverable modal-trigger" id="open-email-modal">Share</button>
+ </div>
+ <div class="col s4 right-align">
+ {{#if isFromDriver}}<button class="blue darken-1 gotoDriverlog waves-effect waves-light btn hoverable">Go to log</button>{{/if}}
+	</div>
+
+	<div class="col s12">
+	 <div class="input-field inline grey-text text-lighten-3">
+Showing Report for past <input type="text" value="{{no_of_days}}" maxlength="1" style="width:40px;" id="no_of_days_input" class="center-align" />
+Days  <button class="grey lighten-5 black-text btn waves-effect hoverable" id="get_report">Get Report</button>
+</div>
+</div>
+</div>
+{{/if}}
+</div>
+<p class="maring-top150"></p>
+<div id="main">
+{{#each array}}
+<div id="main{{@index}}">
+{{>trip_table data=this}}
+{{>reports_screen_by_graph_developer date=this.graph_date canvas_counter=this.canvas_counter graph_statuses=this.graph_statuses labels=this.labels cycle_rule=this.cycle_rule}}
+ {{>individal_day_form_dvir_record data=this}}
+<br/><p class="dotted-line"></p> <br/>
+</div>
+{{/each}}
+<!-- Modal Structure -->
+  <div id="email-modal" class="modal">
+    <div class="modal-content">
+      <h5>Enter email to get report</h5>
+      <div class="row">
+		<div class="input-field col s12">
+          <input placeholder="Email" id="to_email" type="email" class="validate">
+          <label for="to_email" data-error="wrong" data-success="right">Email</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-action modal-close btn-flat waves-green hoverable" id="send_email">Send Email</button> <button class="modal-action modal-close waves-red btn-flat hoverable">Cancel</button>
+    </div>
+  </div>
+</div>
+</template>

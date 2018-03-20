@@ -1,0 +1,21 @@
+<template name="popover">
+    <ul class="dropdown-content" id="dropdown1">
+        <li>
+            <a href="/profile">Profile</a>
+        </li>
+	   <li>
+            <a href="/dashboard">Dashboard</a>
+        </li>
+		<li>
+            <a href="/view-notifications-list">Notifications</a>
+        </li>
+		 <li>
+            <a href="/change-password">Change Password</a>
+        </li>
+        <li class="divider">
+        </li>
+        <li>
+           {{>logout_link }}
+        </li>
+    </ul>
+</template>

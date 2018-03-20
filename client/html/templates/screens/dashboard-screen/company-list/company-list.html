@@ -1,0 +1,19 @@
+<template name="company_list">
+	{{#if company_list}}
+	<div class="container">
+	<ul class="collection with-header z-depth-1">
+		<div class="collection-header center-align"><h5>List of Companies</h5></div>
+		{{#each company_list}}
+		<a href="javascript:void(0)" class="collection-item  light-blue-text text-darken-3 row_link"><b>{{this.company_profile.company_name}}</b> <span  class="secondary-content light-blue-text text-darken-3"><i class="material-icons">send</i></span></a>
+		{{/each}}
+	</ul>
+	</div>
+
+	{{else}}
+	<br />
+	<br />
+	<div class="container">
+	If the company you are looking for is not in this list, please call your company to provide you access.
+	</div>
+	{{/if}}
+</template> 

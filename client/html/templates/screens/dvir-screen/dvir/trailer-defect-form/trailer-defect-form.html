@@ -1,0 +1,33 @@
+<template name="trailer_defect_form">
+ 
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="trailer_no" placeholder="Trailer Number" type="text" value="{{value}}"/>
+                    <label class="active" for="vehicles">
+                        Trailer Number 1
+                    </label>
+					<i class="material-icons prefix error_alert hidden" id="error_trailer_no">&#xE001;</i>
+                </div>
+			 <div class="input-field col s12">
+                    <input id="trailer_no2" placeholder="Trailer Number" maxlength="10" type="text" value="{{value2}}"/>
+                    <label class="active" for="vehicles">
+                        Trailer Number 2
+                    </label>
+					<i class="material-icons prefix error_alert hidden" maxlength="10" id="error_trailer_no2">&#xE001;</i>
+                </div>
+			 <div class="input-field col s12">
+                    <input id="trailer_no3" placeholder="Trailer Number2" maxlength="10" type="text" value="{{value3}}"/>
+                    <label class="active" for="vehicles">
+                        Trailer Number 3
+                    </label>
+					<i class="material-icons prefix error_alert hidden" maxlength="10" id="error_trailer_no3">&#xE001;</i>
+                </div>
+            </div>
+        </form>
+    </div>
+	   {{>dvir_trailer_defect_list}}
+    
+ 
+</template>

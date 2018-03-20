@@ -1,0 +1,14 @@
+<template name="company_view_driver_log">
+{{#if array}}
+<br />
+<div class="container"><b>Showing Report for past&nbsp;&nbsp;<input type="text" value="{{no_of_days}}" style="width:20px;display:inline" id="no_of_days_input" />
+Days</b>
+</div>
+{{/if}}
+{{#each array}}
+{{>trip_table data=this}}
+{{>reports_screen_by_graph_developer date=this.graph_date canvas_counter=this.canvas_counter graph_statuses=this.graph_statuses labels=this.labels}}
+ {{>individal_day_form_dvir_record data=this}}
+<br /><br /><hr/><br /><br />
+{{/each}}
+</template>

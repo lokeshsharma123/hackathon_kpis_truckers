@@ -1,0 +1,56 @@
+<template name="reports_screen_by_graph_developer">
+	<p class="small-text right-align">{{cycle_rule}}</p>
+    <div class="wrapper"><div class="main" id="{{concat 'chartContainer' this.canvas_counter}}"></div>  
+            <div id="{{concat 'tCountOff' this.canvas_counter}}" class="tCountOff label-hr black-text center-align">{{labels.tCountOff}}
+            </div>
+            <div id="{{concat 'tCountSb' this.canvas_counter}}" class="tCountSb label-hr black-text center-align">{{labels.tCountSb}}
+            </div>
+            <div id="{{concat 'tCountD' this.canvas_counter}}" class="tCountD label-hr black-text center-align">{{labels.tCountD}}
+            </div>
+            <div id="{{concat 'tCountOn' this.canvas_counter}}" class="tCountOn label-hr black-text center-align">{{labels.tCountOn}}
+            </div>
+	</div>
+
+
+
+<div class="row">
+<div class="col s12">
+<table class="responsive-table bordered z-depth-2">
+    <thead>
+
+        <tr>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Odometer</th> 
+            <th>Engine hour</th>
+            <th>Status</th>
+            <th>Origin</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {{#each statuses}}
+        <tr>
+		{{> status}}
+
+        </tr>
+        {{/each}}
+
+       </tbody>
+</table>
+</div>
+</div>
+</template>
+
+<template name="status">
+    <td>{{start_time}}</td>
+    <td>{{location}}</td>
+    <td>{{odometer}}</td>
+    <td>{{engine_hour}}</td>
+    <td>{{status}}</td>
+    <td>{{origin}}</td>
+</template>
+
+<template name="dataComing">
+    <td>{{duty}}/24.00</td>
+</template>

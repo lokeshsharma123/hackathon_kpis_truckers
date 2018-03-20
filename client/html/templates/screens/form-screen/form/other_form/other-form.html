@@ -1,0 +1,51 @@
+<template name="other_form">
+    <ul style="margin-top: 0px;line-height:3rem">
+        <li>
+            <div class="divider">
+            </div>
+        </li>
+        <li class="grey lighten-3">
+            <div class="container">
+                Other
+            </div>
+        </li>
+        <li>
+            <div class="divider">
+            </div>
+        </li>
+    </ul>
+   <div class="row">
+        <form class="col s12">
+		   <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="From" id="from" value={{from}} type="text" />
+                    <label for="from" class="active">From</label>
+					<i class="material-icons prefix error_alert hidden" id="error_from">&#xE001;</i>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="To" id="to" value={{to}} type="text" class="validate" />
+                    <label for="to" class="active">To</label>
+					<i class="material-icons prefix error_alert hidden" id="error_to">&#xE001;</i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Co-Drivers" id="co_drivers" value={{co_drivers}} type="text" />
+                    <label for="co_drivers" class="active">Co-Drivers</label>
+					<i class="material-icons prefix error_alert hidden" id="error_codrivers">&#xE001;</i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Notes" id="notes" value={{notes}} type="text" class="validate" />
+                    <label for="notes" class="active">Notes</label>
+					<i class="material-icons prefix error_alert hidden" id="error_notes">&#xE001;</i>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</template>

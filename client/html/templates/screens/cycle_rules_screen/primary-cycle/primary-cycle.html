@@ -1,0 +1,129 @@
+<template name="primary_cycle">
+ 
+        
+            <!--<ul style="margin-top: 0px;line-height:3rem">
+                <li>
+                    <div class="divider">
+                    </div>
+                </li>
+                <li class="grey lighten-3">
+                    <div class="container">
+                        Cycle
+                    </div>
+                </li>
+                <li>
+                    <div class="divider">
+                    </div>
+                </li>
+            </ul>-->
+            
+                <div class="row">
+	 
+                    <div class="input-field col s12">
+					    <select id="cycle_rule" class="browser-default">
+                            <option disabled="" value="select" >
+                               Choose Cycle Rule
+                            </option>
+                           {{#each cycle_rule_list}}
+						   {{#if equals received_cycle_rule rule}}
+						   <option value="{{_id}}" selected>{{rule}}</option>
+						   {{else}}
+						{{#if equals rule "USA 70HR/8DAY"}}
+						<option value="{{_id}}" selected>{{rule}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{rule}}</option>
+						{{/if}}
+						{{/if}}
+						{{/each}}
+                        </select>
+                       
+                    </div>
+                </div>
+          
+           <!-- <ul style="margin-top: 0px;line-height:3rem">
+                <li>
+                    <div class="divider">
+                    </div>
+                </li>
+                <li class="grey lighten-3">
+                    <div class="container">
+                        Options
+                    </div>
+                </li>
+                <li>
+                    <div class="divider">
+                    </div>
+                </li>
+            </ul>-->
+          
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="restart" class="browser-default" >
+                            <option disabled="" value="select" selected>
+                                Choose RESTART
+                            </option>
+							{{#each restart_rule_list}}
+						   {{#if equals this.data.restart rule}}
+						   <option value="{{_id}}" selected>{{rule}}</option>
+						   {{else}}
+						{{#if equals rule "34 Hour Restart"}}
+						<option value="{{_id}}" selected>{{rule}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{rule}}</option>
+						{{/if}}
+						{{/if}}
+						{{/each}}
+							 
+                             
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="rest_break" class="browser-default" >
+                            <option disabled="" value="select" selected>
+                                Choose REST BREAK
+                            </option>
+							{{#each rest_break_list}}
+						   {{#if equals this.data.rest_break rule}}
+						   <option value="{{_id}}" selected>{{rule}}</option>
+						   {{else}}
+						{{#if equals rule "30 MIN"}}
+						<option value="{{_id}}" selected>{{rule}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{rule}}</option>
+						{{/if}}
+						{{/if}}
+						{{/each}}
+							 
+                            
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="short_haul_exception" class="browser-default" >
+                            <option disabled value="select" selected>
+                                Choose SHORT HAUL EXCEPTION
+                            </option>
+							{{#each short_haul_exception_list}}
+						   {{#if equals this.data.short_haul_exception rule}}
+						   <option value="{{_id}}" selected>{{rule}}</option>
+						   {{else}}
+						{{#if equals rule "No Exception"}}
+						<option value="{{_id}}" selected>{{rule}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{rule}}</option>
+						{{/if}}
+						{{/if}}
+						{{/each}}
+                             
+                        </select>
+ 
+                    </div>
+                </div>
+      
+      
+</template>

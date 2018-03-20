@@ -1,0 +1,30 @@
+<template name="upload_shipping_documents">
+    {{>navbar title="Upload Shipping Documents" left="Cancel" right=option internal=true}}
+<br />
+<br />	 
+	 <div class="row">
+   <div class="file-field input-field col s12">
+      <div class="btn col s8">
+         Upload Documents <i class="material-icons">
+                                file_upload
+                            </i>
+        <input type="file" class="file_input">
+      </div>
+	   <div class="file-path-wrapper col s4">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+	</div>
+	 <form action="#">
+        <ul class="collection" style="border-top:0px">
+            {{#each category_list}}
+            <li class="collection-item">
+                <input class="browser-default category" category="{{this.category}}" id="{{this._id}}" type="checkbox"/>
+                <label class="black-text" for="{{this._id}}">
+                    {{this.category}}
+                </label>
+            </li>
+            {{/each}}
+        </ul>
+    </form>
+</template>

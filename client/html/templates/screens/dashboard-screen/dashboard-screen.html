@@ -1,0 +1,408 @@
+<template name="dashboard_screen">
+    {{>navbar title="Dashboard" internal=false right="ellipsis_icon"}}
+    
+	<br />
+	{{#if equals profile.type "company"}}
+	
+
+	 
+<div class="row">
+	 	<ul class="collection with-header z-depth-1">
+		<div class="collection-header center-align"><h5>Driver</h5></div>
+		
+		<a href="/add-driver" class="collection-item  light-blue-text text-darken-3 row_link"><b>Add Driver</b> <span  class="secondary-content light-blue-text text-darken-3"><i class="material-icons">send</i></span></a>
+		<a href="/view-drivers" class="collection-item  light-blue-text text-darken-3 row_link"><b>View Drivers</b> <span  class="secondary-content light-blue-text text-darken-3"><i class="material-icons">send</i></span></a>
+		
+	</ul>
+	
+	
+		<ul class="collection with-header z-depth-1">
+		<div class="collection-header center-align"><h5>Trailer</h5></div>
+		
+		<a href="/add-truck" class="collection-item  light-blue-text text-darken-3 row_link"><b>Add Trailer</b> <span  class="secondary-content light-blue-text text-darken-3"><i class="material-icons">send</i></span></a>
+		<a href="/view-trucks" class="collection-item  light-blue-text text-darken-3 row_link"><b>View Trailer</b> <span  class="secondary-content light-blue-text text-darken-3"><i class="material-icons">send</i></span></a>
+		
+	</ul>
+	
+  </div>
+
+          
+<div class="row">
+         <!--report list-->  
+        	<div class="z-depth-2">
+	{{#if driver_list}}
+        <table>
+		<thead>
+            <tr>
+			<th>Name</th> 
+			<th>Link Report</th>
+            <th>Last Update</th> 
+			<th>Location</th> 
+			<th>HOS remaining</th> 
+			<th>Violations (yes/no)</th> 
+			</tr>
+        </thead>
+        <tbody>
+		{{#each driver_list}}
+    <tr class="collection-item avatar row_link">
+       <td>
+		{{#if this.driver_id}}
+		{{this.driver_profile.first_name}}
+		{{this.driver_profile.last_name}}
+ 	  
+	   {{else}}
+	   {{this.profile_by_company.first_name}}
+ {{this.profile_by_company.last_name}}
+	 {{/if}}
+      </td>
+      <td>
+	  {{#if this.driver_id}}
+          <button  viewReport>view report</button>
+	  {{else}}
+	 <a ><i >error_outline</i></a> 
+	  {{/if}}
+          </td>
+          <td> {{this.time}}</td>
+          <td>{{this.location}}</td>
+           <td> {{this.hos}}</td>
+          <td>{{this.violation}}</td>
+        
+    </tr>
+	{{/each}}
+        </tbody>
+	</table>
+	{{else}}
+
+
+	<h6 class="valign-wrapper align-center"><i class="material-icons red-text text-darken-3">info</i> No driver has been added so far</h6>
+	{{/if}}
+	</div>
+
+         
+         <!--undefined driver--> 
+           	<div class="z-depth-2">
+	
+			
+	{{#if undefined_driver_list}}
+        <table>
+		<thead>
+          <tr>
+              <th>EldId</th>
+              <th>Total Time</th>
+              <th>Malfunction Notification</th>
+          </tr>
+        </thead>
+            <tbody>
+		{{#each undefined_driver_list}}
+    <tr>
+       <td>
+	   {{this.eldId}}
+      </td>
+	  <td>
+	   {{this.tTime}}
+      </td>
+      
+      <td> {{this.isMalFunc}}</td>
+      
+    </tr>
+	{{/each}}
+	 </tbody>
+	</table>
+	 {{/if}}
+	</div>
+   </div>      
+         
+		{{else}}
+		{{#if equals profile.type "driver"}}
+		{{>company_list}}
+             <span class="out-of-view"><input class="form-control1" type="text" placeholder="Speed" id="speed"></span>
+<!--             <span style="position: absolute;right: 90px;z-index: 1000;top: 84px;z-index: 1000;"><button  distance>distance</button> </span>
+             <span style="position: absolute;right: 180px;z-index: 1000;top: 84px;z-index: 1000;"><input class="form-control1" type="text" placeholder="lat" id="lat"></span>
+               <span style="position: absolute;right: 270px;z-index: 1000;top: 84px;z-index: 1000;"><input class="form-control1" type="text" placeholder="lon" id="lon"></span>-->
+		{{/if}}
+	{{/if}}
+ 
+	
+	<!--<a href="/bluetooth">Bluetooth</a><br /><br />-->
+	<a class="out-of-view" href="/events">Events for Testing</a><br /><br />
+	<!--<a href="/csv">CSV</a>-->
+ 
+       <!-- <h5>
+            Welcome
+        </h5>
+		{{#if equals profile.type "company"}}
+        <a href="/add-driver">
+            Add Driver
+        </a>  <br/>
+		<a href="/view-drivers">
+            View Drivers
+        </a>
+		{{else}}
+		{{#if equals profile.type "driver"}}
+		 <a href="/form">
+            Go to DVIR Form
+        </a>
+        <br/>
+        <a href="/report">
+            Report
+        </a>
+		{{/if}}
+		{{/if}}
+		-->
+
+<!--	<script type="text/javascript">
+ var app = {
+          initialize: function() {
+            console.log("bletooth-");
+              this.bindEvents();
+              //this.showMainPage();
+          },
+          bindEvents: function() {
+            app.onDeviceReady();
+            app.refreshDeviceList();
+              var TOUCH_START = 'touchstart';
+              if (window.navigator.msPointerEnabled) { // windows phone
+                  TOUCH_START = 'MSPointerDown';
+              }
+              //document.addEventListener('deviceready', this.onDeviceReady, false);
+              //refreshButton.addEventListener(TOUCH_START, this.refreshDeviceList, false);
+              //sendButton.addEventListener(TOUCH_START, this.sendData, false);
+              //disconnectButton.addEventListener(TOUCH_START, this.disconnect, false);
+              //deviceList.addEventListener('touchstart', this.connect, false);
+              //deviceListUnPair.addEventListener('touchstart', this.connect, false);
+          },
+          onDeviceReady: function() {
+              app.refreshDeviceList();
+          },
+          refreshDeviceList: function() {
+              bluetoothSerial.list(app.onDeviceList, app.onError);
+              //bluetoothSerial.discoverUnpaired(app.onDeviceListUnPair, app.onError);
+          },
+          onDeviceList: function(devices) {
+              var option;
+console.log("device execute");
+              // remove existing devices
+              //deviceList.innerHTML = "";
+              //app.setStatus("");
+              
+              //deviceList.remove();
+              var devList = [];
+              devices.forEach(function(device) {
+
+                  //var listItem = document.createElement('li'),
+                    //  html = '<b>' + device.name + '</b><br/>' + device.id;
+
+                 // listItem.innerHTML = html;
+
+                  var singleObj = {}
+              singleObj['name'] = device.name;
+
+                  console.log(device);
+
+                  if (cordova.platformId === 'windowsphone') {
+                    // This is a temporary hack until I get the list tap working
+                   // var button = document.createElement('button');
+                    //button.innerHTML = "Connect";
+                    //button.addEventListener('click', app.connect, false);
+                    //button.dataset = {};
+                    //button.dataset.deviceId = device.id;
+                    //listItem.appendChild(button);
+                  } else {
+                    //listItem.dataset.deviceId = device.id;
+                    singleObj['id'] = device.id;
+                  }
+                  //deviceList.appendChild(listItem);
+                  
+              
+                  devList.push(singleObj);
+              });
+
+              console.log("deviceList");
+              console.log(devList);
+
+              if (devices.length === 0) {
+
+                  option = document.createElement('option');
+                  option.innerHTML = "No Bluetooth Devices";
+                  deviceList.appendChild(option);
+
+                  if (cordova.platformId === "ios") { // BLE
+                      app.setStatus("No Bluetooth Peripherals Discovered.");
+                  } else { // Android or Windows Phone
+                      app.setStatus("Please Pair a Bluetooth Device.");
+                  }
+
+              } else {
+                  app.setStatus("Found " + devices.length + " device" + (devices.length === 1 ? "." : "s."));
+                  
+                  //console.log(Object.keys(devList[0])[1]);
+                  console.log(devList[0]['id']);
+                  
+                  setInterval(function(){app.connect(devList[0]['id']); }, 30000);
+              }
+          },
+          onDeviceListUnPair: function(devices) {
+                  var option;
+console.log("UnPair execute");
+                  // remove existing devices
+                  //deviceListUnPair.innerHTML = "";
+                  app.setStatus("");
+
+                  devices.forEach(function(device) {
+
+                      var listItem = document.createElement('li'),
+                          html = '<b>' + device.name + '</b><br/>' + device.id;
+
+                      listItem.innerHTML = html;
+
+                      console.log(device);
+
+                      if (cordova.platformId === 'windowsphone') {
+                        // This is a temporary hack until I get the list tap working
+                        var button = document.createElement('button');
+                        button.innerHTML = "Connect";
+                        button.addEventListener('click', app.connect, false);
+                        button.dataset = {};
+                        button.dataset.deviceId = device.id;
+                        listItem.appendChild(button);
+                      } else {
+                        listItem.dataset.deviceId = device.id;
+                      }
+                      deviceListUnPair.appendChild(listItem);
+                  });
+
+console.log("UnPair");
+console.log(deviceListUnPair);
+
+
+                  if (devices.length === 0) {
+
+                      option = document.createElement('option');
+                      option.innerHTML = "No Bluetooth Devices";
+                      deviceListUnPair.appendChild(option);
+
+                      if (cordova.platformId === "ios") { // BLE
+                          app.setStatus("No Bluetooth Peripherals Discovered.");
+                      } else { // Android or Windows Phone
+                          app.setStatus("Please Pair a Bluetooth Device.");
+                      }
+
+                  } else {
+                      app.setStatus("Found " + devices.length + " device" + (devices.length === 1 ? "." : "s."));
+                      
+                  }
+
+              },
+          bin2string: function (array){
+            var result = "";
+            for(var i = 0; i < array.length; ++i){
+              result+= (String.fromCharCode(array[i]));
+            }
+            return result;
+          },
+          connect: function(e) {
+              var onConnect = function(data) {
+
+
+bluetoothSerial.subscribeRawData(function (data) {
+                    var bytes = new Uint8Array(data);
+                    console.log("AAAA");
+var result = "";
+            for(var i = 0; i < bytes.length; ++i){
+              result+= (String.fromCharCode(bytes[i]));
+            }
+                    app.onData(result);
+
+                    console.log("Raw data");
+                    console.log(data);
+                    console.log(bytes);
+                    console.log(result);
+                }, function(err){
+                    console.log("Raw data");
+                    console.log(err)
+                });
+                      //resultDiv.innerHTML = "";
+                      app.setStatus("Connected");
+                      
+                      app.sendData("00f003 1");
+                      //app.showDetailPage();
+                  };
+
+                    //var deviceId = e.target.dataset.deviceId;
+                    var deviceId = e; 
+             
+
+              console.log("Start connect");
+              //app.sendData("00f003 1");
+              console.log(deviceId);
+              bluetoothSerial.isConnected(
+    function() {
+        console.log("Bluetooth is connected");
+        //app.sendData("00f003 1");
+        app.disconnect();
+
+    },
+    function() {
+        console.log("Bluetooth is *not* connected");
+        bluetoothSerial.connect(deviceId, onConnect, app.onError);
+    }
+);
+              
+          },
+          onData: function(data) { // data received from Arduino
+              console.log(data);
+              console.log("BBBB");
+              //resultDiv.innerHTML = resultDiv.innerHTML + "Received: " + data + "<br/>";
+              //resultDiv.innerHTML = resultDiv.innerHTML + "Received: " + app.bin2string(data) + "<br/>";
+              //resultDiv.scrollTop = resultDiv.scrollHeight;
+          },
+          sendData: function(event) { // send data to Arduino
+
+              var success = function() {
+                  console.log("success");
+                  //resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + messageInput.value + "<br/>";
+                  //resultDiv.scrollTop = resultDiv.scrollHeight;
+              };
+
+              var failure = function() {
+                  alert("Failed writing data to Bluetooth peripheral");
+              };
+
+              var data = event+"\r";
+              console.log(event);
+              // ble.write(connectedDeviceId, "FFF0", "FFF2", data.buffer, success, failure);
+              bluetoothSerial.write(data, success, failure);
+          },
+          disconnect: function(event) {
+
+            bluetoothSerial.disconnect(app.showMainPage, app.onError);
+          },
+          showMainPage: function() {
+              mainPage.style.display = "";
+              detailPage.style.display = "none";
+          },
+          showDetailPage: function() {
+              mainPage.style.display = "none";
+              detailPage.style.display = "";
+          },
+          setStatus: function(message) {
+              console.log("111"+message);
+
+              window.clearTimeout(app.statusTimeout);
+              //statusDiv.innerHTML = message;
+              //statusDiv.className = 'fadein';
+
+              // automatically clear the status with a timer
+              app.statusTimeout = setTimeout(function () {
+                  //statusDiv.className = 'fadeout';
+              }, 5000);
+          },
+          onError: function(reason) {
+              console.log("Error");
+              console.log(reason);
+              alert("ERROR: " + reason); // real apps should use notification.alert
+          }
+      };
+      app.initialize();
+      </script> -->
+</template>

@@ -1,0 +1,103 @@
+<template name="edit_driver">
+    {{>navbar title="Driver Profile" left="Cancel" right=option internal=true}}
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="First Name" id="first_name" value="{{user.first_name}}" type="text">
+                    <label for="first_name" class="active">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Last Name" id="last_name" value="{{user.last_name}}" type="text">
+                    <label for="last_name" class="active">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Driver ID" id="driver_id" value="{{user.driver_id}}" type="text">
+                    <label for="driver_id" class="active">Driver ID</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Phone" id="phone" value="{{user.phone}}" type="text">
+                    <label for="phone" class="active">Phone</label>
+                </div>
+            </div>
+             <div class="row">
+                <div class="input-field col s12">
+					<select id="company_id" class="browser-default">
+                        <option value="select" disabled selected>Choose your Company Name</option>
+                        {{#each company_name_list}}
+						 {{#if equals this._id company_id}}
+						<option value="{{_id}}" selected > {{company_name}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{company_name}}</option>
+						{{/if}}
+						{{/each}}
+                    </select>
+					<!--<input placeholder="Career Name" id="careername" type="text" class="validate">
+                    <label for="careername">Career Name</label>
+					-->
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Main Office Address" id="mainoffice" value="{{user.mainoffice}}" type="text">
+                    <label for="mainoffice" class="active">Main Office Address</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Terminal Address" id="terminal" value="{{user.terminal}}"  type="text">
+                    <label for="terminal" class="active">Terminal Address</label>
+                </div>
+				
+            </div>
+			<div class="row">
+			 <div class="input-field col s12">
+                   <!-- <input placeholder="Cargo Type" id="cargo_type" type="text">
+                    <label for="cargo_type">Cargo Type</label>-->
+					<select id="cargo_type" class="browser-default">
+                        <option value="select" disabled selected>Choose your Cargo Type</option>
+                        {{#each cargo_type_list}}
+						 {{#if equals this._id cargo_type}}
+						<option value="{{_id}}" selected >{{cargo_type}}</option>
+						{{else}}
+						<option value="{{_id}}" >{{cargo_type}}</option>
+						{{/if}}
+						{{/each}}
+                    </select>
+					 <!--<label for="cargo_type">Cargo Type</label>-->
+                </div>
+				  </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="httz" class="browser-default">
+                        <option value="select" disabled selected>Choose your Home Terminal Time Zone</option>
+                         {{#each httz_list}}
+						 {{#if equals this._id httz }}
+						<option value="{{_id}}" selected>{{timezone}}</option>
+						{{else}}
+						<option value="{{_id}}">{{timezone}}</option>
+						{{/if}}
+						 {{/each}}
+                    </select>
+                   <!-- <label for="httz">Home Terminal Time Zone</label>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                   <!-- <select id="odometer">
+                        <option value="select" disabled>Choose your option</option>
+                        <option value="1" selected>MILES</option>
+                    </select>
+                    <label for="odometer">ODOMETER</label>-->
+					<!--<input placeholder="Odometer" id="odometer" type="number">
+                    <label for="odometer">Odometer</label>-->
+                </div>
+            </div>
+        </form>
+    </div>
+</template>

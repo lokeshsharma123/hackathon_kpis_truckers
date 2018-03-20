@@ -1,0 +1,51 @@
+<template name="dvir_vehicle_defect_list">
+ {{#unless defects}}
+    <center>
+        <i aria-hidden="true" class="fa fa-wrench">
+        </i>
+        No defects found
+    </center>
+    <a id="show_vehicle_defect_list">
+        <table>
+            <tr>
+                <td style="text-align: right">
+                    <i class="material-icons" style="display:inline;">
+                        &#xE145;
+                    </i>
+                </td>
+                <td style="text-align: left">
+                    Add/Remove Vehicle Defects
+                </td>
+            </tr>
+        </table>
+    </a>
+    {{else}}
+	<a id="show_vehicle_defect_list">
+        <table>
+            <tr>
+                <td style="text-align: right">
+                    <i class="material-icons" style="display:inline;">
+                        &#xE145;
+                    </i>
+                </td>
+                <td style="text-align: left">
+                    Add/Remove Vehicle Defects
+                </td>
+            </tr>
+        </table>
+    </a>
+    <ul class="collection">
+        <li class="collection-item active">
+            Vehicle Defects
+        </li>
+        {{#each defects}}
+        <li class="collection-item">
+		{{this.defect.defect}}
+            <!--{{getvehicledefect this._id}}-->
+			<a class="secondary-content delete_button"><i class="material-icons red-text text-darken-2">&#xE872;</i></a>
+        </li>
+        {{/each}}
+    </ul>
+    {{/unless}}
+	
+</template>

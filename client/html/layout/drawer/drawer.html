@@ -1,0 +1,19 @@
+<template name="drawer">
+
+  <ul id="slide-out" class="side-nav">
+    <li><div class="user-view">
+      <div class="background light-blue darken-2">
+        
+      </div>
+      <a href="#"><img class="circle" src="/images/pna.png"></a>
+      <a href="#"><span class="white-text name">{{user.profile.first_name
+}} {{user.profile.last_name}}</span></a>
+      <a href="#"><span class="white-text email">{{user.profile.email}}</span></a>
+    </div></li>
+    <li><a class="waves-effect" href="/reports"><i class="material-icons">chrome_reader_mode</i>Reports</a></li>
+    <!-- <li><a class="waves-effect" href="/document-manager"><i class="material-icons">insert_drive_file</i> My Documents</a></li> -->
+    <li><div class="divider"></div></li>
+    <!-- <li><a class="subheader">Subheader</a></li> -->
+    <li>{{>logout_link }}</li>
+  </ul>
+</template>

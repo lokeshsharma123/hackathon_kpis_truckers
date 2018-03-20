@@ -1,0 +1,41 @@
+<template name="view_notifications_list_screen">
+ {{>navbar title="Notifications" internal=false right="ellipsis_icon"}}
+   <div class="container">
+  <h5>Notifications</h5>
+   </div>
+	 <ul class="collection">
+     <!-- <li class="collection-item">Fleet Manager has requested to make edits to log from july 24 2017</li>
+     <li class="collection-item"><a href="/view-notifications">CSV file pending list</a></li>-->
+	  <li class="collection-item"><a href="/bluetooth">Bluetooth</a>
+      <div >
+  <h6 id="p1">Connected</h6>
+   </div>
+    </li>
+	   
+    </ul>
+	
+	<h6>Malfunction</h6>
+		  <div class="col-md-3 col-xs-3">
+            <div class="off-duty" driving > <a href="#" > <span id="powerButton" style="width:50px;height:50px;line-height: 25px">P</span> <span class="title"></span> </a> </div>
+          </div>
+		  
+		  <div class="col-md-3 col-xs-3">
+            <div class="off-duty" driving > <a href="#" > <span id="eButton" style="width:50px;height:50px;line-height: 25px">E</span> <span class="title"></span> </a> </div>
+          </div>
+		  
+		  <div class="col-md-3 col-xs-3">
+            <div class="off-duty" driving > <a href="#" > <span id="locationButton" style="width:50px;height:50px;line-height: 25px">L</span> <span class="title"></span> </a> </div>
+          </div>
+		  
+		  <div class="col-md-3 col-xs-3">
+            <div class="off-duty" driving > <a href="#" > <span id="timeButton" style="width:50px;height:50px;line-height: 25px">T</span> <span class="title"></span> </a> </div>
+          </div>
+		 
+		 <div class="col-md-3 col-xs-3">
+            <div class="off-duty" driving > <a href="#" > <span id="dRecordButton" style="width:50px;height:50px;line-height: 25px">R</span> <span class="title"></span> </a> </div>
+          </div>
+     	 
+		 <div class="col-md-3 col-xs-3">
+            <div class="off-duty" driving > <a href="#" > <span id="dTransferButton" style="width:50px;height:50px;line-height: 25px">S</span> <span class="title"></span> </a> </div>
+          </div>
+</template>

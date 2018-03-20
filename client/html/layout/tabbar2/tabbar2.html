@@ -1,0 +1,23 @@
+<template name="tabbar2">
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs" style="position: fixed;z-index:997;margin-left:-15px;margin-top:2px">
+                <li class="tab col s3">
+                    <a class="active" href="#test1" id="tab1">
+                        Primary Cycle
+                    </a>
+                </li>
+                <li class="tab col s3">
+                    <a href="#test2" id="tab2">
+                        Secondary Cycle
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col s12" id="test1" style="margin-top: 48px">
+            {{>primary_cycle}}
+        </div>
+        <div class="col s12" id="test2" style="margin-top: 48px">
+        </div>
+    </div>
+</template>

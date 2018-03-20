@@ -1,0 +1,68 @@
+<template name="edit_profile">
+    {{>navbar title="Profile" left="Cancel" right=option internal=true}}
+     
+        <form>
+		 <div class="row">
+                <div class="input-field col s12">
+                    <input  id="email" disabled value="{{user.email}}" type="text" class="validate">
+                    <label class="active" for="last_name">Email</label>
+                </div>
+           
+                
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="First Name" id="first_name" type="text" value="{{user.first_name}}" class="validate">
+                    <label class="active" for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Last Name" id="last_name" type="text" value="{{user.last_name}}" class="validate">
+                    <label class="active" for="last_name">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input disabled placeholder="Licence No" id="driver_licence_no" value="{{user.driver_licence_no}}" type="number" class="validate">
+                    <label class="active"  for="driver_licence_no">Licence No.</label>
+                </div>
+          
+			 <div class="input-field col s6">
+                 	<select id="state_id" class="browser-default">
+                        <option value="select" disabled selected>State</option>
+                        {{#each state_list}}
+						 {{#if equals this._id user.state_id}}
+						<option value="{{_id}}" selected >{{state}}</option>
+						{{else}}
+						<option value="{{_id}}" disabled>{{state}}</option>
+						{{/if}}
+						{{/each}}
+                    </select>
+					 
+                </div>
+				  </div>
+				   <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Class" id="class" value="{{user.classs}}" type="text" class="validate">
+                    <label class="active"  for="class">Class</label>
+                </div>
+				 <!--<div class="input-field col s6">
+                    <input disabled placeholder="Expiration(mm-dd-yy)" value="{{user.expiration}}" id="expiration" type="text" class="validate">
+                    <label class="active" for="expiration">Expiration(mm-dd-yy)</label>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Phone" id="phone" value="{{user.phone}}" type="text" class="validate">
+                    <label class="active" for="phone">Phone</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="home_address" value="{{user.home_address}}" class="materialize-textarea"></textarea>
+          <label class="active" for="home_address">Home Address</label>
+                </div>
+            </div>
+		 
+        </form>
+ 
+</template>

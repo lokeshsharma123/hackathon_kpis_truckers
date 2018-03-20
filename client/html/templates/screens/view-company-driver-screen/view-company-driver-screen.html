@@ -1,0 +1,59 @@
+<template name="view_company_driver">
+    {{>navbar left='back_icon' title="Driver Profile" right=option internal=true}}
+	<div class="container">
+     <div class="row">
+                <div class="input-field col s6">
+                    <label>Name</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.profile_by_company.first_name}} {{profile.profile_by_company.last_name}}</label>
+                </div>
+            </div> 
+	 	 
+           <div class="row">
+                <div class="input-field col s6">
+                    <label>Licence No</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_licence_no}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>State</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{state}}</label>
+                </div>
+            </div>
+			 
+			 
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Phone</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.profile_by_company.phone}}</label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="input-field col s6">
+                    <label>Exempted</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>
+					{{#if equals profile.profile_by_company.exempt_driver_configuration "E"}}
+					Yes ({{profile.profile_by_company.ex_reason}})
+					{{else}}
+					No
+					{{/if}}
+					</label>
+                </div>
+            </div>
+			 <br />
+			 <br />
+			 <br />
+			 <br />
+			 <b>Note: This driver has not created his account yet. Please ask him to create the account.</b>
+	</div>
+	</template>

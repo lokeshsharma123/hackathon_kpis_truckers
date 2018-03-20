@@ -1,0 +1,48 @@
+<template name="view_drivers_screen">
+    {{>navbar title="List of Drivers" internal=false right="ellipsis_icon"}}
+    
+	<div class="row">
+	<div class="col s12">
+	{{#if driver_list}}
+        <ul class="collection">
+		{{#each driver_list}}
+    <li class="collection-item avatar row_link">
+      <img src="/images/pna.png" alt="" class="circle">
+      <span class="title">Licence No.{{this.driver_licence_no}}</span>
+	  
+      <p>
+	 {{#if this.driver_id}}
+	 {{this.driver_profile.state_name}}<br />
+ {{this.driver_profile.first_name}}
+ {{this.driver_profile.last_name}}
+ 
+	  
+	   {{else}}
+	   {{this.profile_by_company.state_name}}<br />
+	   {{this.profile_by_company.first_name}}
+ {{this.profile_by_company.last_name}}
+	 {{/if}}
+      </p>
+	  {{#if this.driver_id}}
+      <a  class="secondary-content"><i class="material-icons">send</i></a>
+	  {{else}}
+	 <a  class="secondary-content"><i class="material-icons prefix error_alert">error_outline</i></a> 
+	  {{/if}}
+          <button style="position: absolute;bottom: 16px;right: 16px;" viewReport>Edit view report</button>
+    </li>
+	{{/each}}
+	</ul>
+	{{else}}
+	<br />
+	<br />
+	No driver has been added so far
+	{{/if}}
+	</div>
+
+    </div>
+ <div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large" href="/add-driver">
+      <i class="large material-icons">add</i>
+    </a>
+    </div>
+	</template>

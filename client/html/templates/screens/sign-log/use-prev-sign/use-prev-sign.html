@@ -1,0 +1,12 @@
+<template name="use_prev_sign">
+{{#if sign}}
+<br />
+{{>disclaimer}}
+<br />
+	<img src="data:image/png;base64,{{sign.signature_file}}" />
+	<br />
+	<a id="use_signature_button" class="btn">Use this Signature</a>
+	<br />
+	{{/if}}
+        <br/>
+</template>

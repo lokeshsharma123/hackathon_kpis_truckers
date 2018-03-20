@@ -1,0 +1,13 @@
+<template name="view_notifications_screen">
+ {{>navbar title="Notifications" internal=false right="ellipsis_icon"}}
+   <div class="container">
+   <h5>CSV Notifications</h5>
+   </div>
+   {{#if error_list}}
+	  <ul class="collection">
+	  {{#each error_list}}
+      <li class="collection-item">{{this}}</li>
+	  {{/each}}
+    </ul>
+	{{/if}}
+</template>

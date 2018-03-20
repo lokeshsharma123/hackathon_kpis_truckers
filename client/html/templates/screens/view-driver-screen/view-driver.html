@@ -1,0 +1,106 @@
+<template name="view_driver_screen">
+    {{>navbar left='back_icon' title="Driver Profile" right=option internal=true}}
+     <div class="row">
+                <div class="input-field col s6">
+                    <label>Name</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.first_name}} {{profile.driver_profile.last_name}}</label>
+                </div>
+            </div> 
+	 	 <div class="row">
+                <div class="input-field col s6">
+                    <label>Email</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.email}}</label>
+                </div>
+            </div>
+           <div class="row">
+                <div class="input-field col s6">
+                    <label>Licence No</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.driver_licence_no}}</label>
+                </div>
+            </div>
+			
+			<div class="row">
+                <div class="input-field col s6">
+                    <label>Exempted</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>
+					{{#if equals profile.profile_by_company.exempt_driver_configuration "E"}}
+					Yes ({{profile.profile_by_company.ex_reason}})
+					{{else}}
+					No
+					{{/if}}
+					</label>
+                </div>
+            </div>
+			<div class="row">
+                <div class="input-field col s6">
+                    <label>State</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{state}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Class</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.classs}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Expiration</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.expiration}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Phone</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.phone}}</label>
+                </div>
+            </div>
+			 <div class="row">
+                <div class="input-field col s6">
+                    <label>Home Address</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>{{profile.driver_profile.home_address}}</label>
+                </div>
+                             
+            </div>
+			<div class="row">
+                <div class="input-field col s6">
+                    <label>Status</label>
+                </div>
+				 <div class="input-field col s6">
+                    <label>
+					{{#if profile.isActive}}
+					Active
+					{{else}}
+					Deactivated
+					{{/if}}
+					</label>
+                </div>
+                             
+            </div>
+			 <div class="row">
+			   <div class="input-field  col s6">
+			<button type="button" class="btn" id="viewLog">ViewLog</button>
+			</div>
+                        <div class="input-field  col s6">
+			<button type="button" class="btn" id="notification"><a href="/view-notifications-list">Notifications</a></button>
+			</div>    
+	</div>
+	</template>

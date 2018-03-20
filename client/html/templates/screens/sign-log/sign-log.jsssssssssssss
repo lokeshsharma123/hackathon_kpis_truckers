@@ -1,0 +1,36 @@
+ Template.sign_log.onRendered(function() {
+        $('.js-signature').jqSignature();
+ 
+})
+ 
+Template.sign_log.events({
+    "click .clear_signature": function(e, tpl) {
+        tpl.$('.js-signature').jqSignature('clearCanvas');
+    },
+	"click #create_new_sign_button":function(e,tpl){
+		  var show_canvas=Template.instance().show_canvas;
+		  show_canvas.set(true);
+		  Session.set("display_canvas",true);
+		  Session.set("show_sign_save_button",true);
+		  setTimeout(function(){
+			$('.js-signature').jqSignature();
+		  },100);
+	}
+})
+
+Template.sign_log.helpers({
+    "show_canvas":function(){
+	//return Template.instance().show_canvas.get();
+	
+	return Session.get("display_canvas");
+	},
+	"sign":function(){
+return Sign.findOne({userid:Meteor.userId()});
+}
+})
+
+Template.sign_log.onCreated(function () {
+ this.show_canvas = new ReactiveVar( false );
+Session.set("display_canvas",false);
+  
+});

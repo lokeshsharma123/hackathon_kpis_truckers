@@ -1,0 +1,48 @@
+<template name="form_screen">
+    <!--{{>navbar left='back_icon' right="ellipsis_icon" internal=true}}-->
+	
+	
+	{{#unless wrapper_condition}}
+    
+	
+	
+	{{#if equals active_tab "tab1"}}
+    {{>log_screen}}
+	{{else}}
+	{{#if equals active_tab "tab2"}}
+    {{>navbar  title=current_date right=option2 display_data_fetch_icons=true internal=false tabbar="true"}}
+	{{else}}
+	 {{#if equals active_tab "tab3"}}
+	{{>navbar  title=current_date right=option3 display_data_fetch_icons=true internal=false tabbar="true"}}
+	{{else}}
+	{{#if equals active_tab "tab4"}}
+		<!--{{#if show_sign_save_button}}-->
+	 {{>navbar  title=current_date right=option4 display_data_fetch_icons=true internal=false tabbar="true"}}
+		<!--{{else}}
+	{{>navbar left='back_icon' title=current_date internal=true display_data_fetch_icons=true tabbar="true"}}
+		{{/if}}-->
+	{{/if}}
+	{{/if}}
+	{{/if}}
+	{{/if}}
+	
+	
+	{{else}}
+	{{#if show_vehicle_defect_screen}}
+	{{>vehicle_defects_list}}
+	{{else}}
+	{{#if show_trailer_defect_screen}}
+	{{>trailer_defects_list}}
+	{{else}}
+	{{#if show_upload_document_screen}}
+	{{>upload_shipping_documents}}
+	{{/if}}
+	{{/if}}
+	{{/if}}
+	
+	
+	{{/unless}}
+	
+	
+	
+</template>

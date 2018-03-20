@@ -1,0 +1,202 @@
+<template name="driver_log"> 
+<style>
+ #previour_day_violation{
+	display:none;
+ }
+</style>
+  <div id="confirm_popup" class="modal">
+    <div class="modal-content">
+      <h5>Your Speed is zero. Do you want to go in offline?</h5>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+	  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="confirmOk">OK</a>
+    </div>
+  </div>
+ {{#if isFromDriver}}
+  {{>navbar left='back_icon' title=current_date right=option internal=true display_data_fetch_icons=true tabbar="true"}}
+ 
+  {{else}}
+ {{>navbar left='back_icon' title=current_date display_data_fetch_icons=true right=option internal="false"}}
+ 
+  {{/if}}
+  
+<!--   {{#if isFromDriver}} -->
+  <span class="out-of-view"><input class="form-control1" type="text" placeholder="Speed" id="speed"></span>
+  <span class="out-of-view"><input class="form-control1" type="text" placeholder="Driver" id="driver_id"></span>
+<!--  {{/if}} -->
+       <div class="wrapper"><div class="main" id="chartContainer"></div>  
+            <div id="tCountOff" class="tCountOff label-hr black-text center-align">
+            </div>
+            <div id="tCountSb" class="tCountSb label-hr black-text center-align">
+            </div>
+            <div id="tCountD" class="tCountD label-hr black-text center-align">
+            </div>
+            <div id="tCountOn" class="tCountOn label-hr black-text center-align">
+            </div>
+	</div>
+
+<!--   {{#if isFromDriver}} -->
+        <div class="row">
+          <div class="col m3 s3 left-align">
+			<a class="dirver-status btn-floating btn-xlarge waves-effect waves-light grey lighten-5 black-text z-depth-4 hoverable valign-wrapper bold-text" id="offDutyButton" offdut>Off Duty</a>
+		  </div>
+          <div class="col m3 s3 center-align">
+			<a class="dirver-status btn-floating btn-xlarge waves-effect waves-light grey lighten-5 black-text z-depth-4 hoverable valign-wrapper bold-text" id="sbDutyButton" sleeper>sleeper berth</a>
+          </div>
+          <div class="col m3 s3 center-align">
+			<a class=" dirver-status btn-floating btn-xlarge waves-effect waves-light  grey lighten-5 black-text z-depth-4 hoverable valign-wrapper bold-text" id="dDutyButton" driving>Driving</a>
+          </div>
+          <div class="col m3 s3 right-align">
+			<a class="dirver-status btn-floating btn-xlarge waves-effect waves-light grey lighten-5 black-text z-depth-4 hoverable valign-wrapper bold-text" id="onDutyButton" onduty>On duty</a>
+		  </div>
+		</div>
+		<div class="row">
+          <div class="col m3 s4 left-align">
+			<a class="waves-effect waves-light grey lighten-5 black-text z-depth-4 btn-large hoverable bold-text" id="personalduty" personalduty>personal conveyance</a>
+		  </div>
+		   <div class="col m6 s4 center-align">
+			<a class="waves-effect waves-light deep-purple accent-4 btn edit-btn hoverable" edit> <i class="large material-icons">mode_edit</i></a>
+			<a class="waves-effect waves-light deep-purple accent-4 btn live-btn hoverable" live>live</a>
+		  </div>
+		   <div class="col m3 s4 right-align">
+			<a class="waves-effect waves-light grey lighten-5 black-text z-depth-4 btn-large hoverable bold-text" id="yardmove" yardmove>Yard Move</a>
+		  </div>
+		</div>
+<!--    {{/if}} -->
+      <div class="location-div">
+        <div class="row">
+			<div class="input-field col s6">
+				<label for="sel1">Start Time</label>
+				<input id="sel1" placeholder="" type="text" class="timepickermeterial" maxlength="5">
+			</div>
+			<div class="input-field col s6">
+				<input id="sel2" placeholder="" type="text" class="timepickermeterial" maxlength="5">
+				<label for="sel2">End Time</label>
+			</div>
+        </div>
+		
+		<div class="row">
+			<div class="input-field col s6">
+				<input id="autocomplete" type="text" onfocus="geolocation"><span class="location-icon"></span>
+				<label for="autocomplete">Location</label>
+			</div>
+			<div class="input-field col s6">
+				<input id="NotesEdit" type="text">
+				<label for="NotesEdit">Notes</label>
+			</div>
+        </div>
+      </div>
+
+
+        <div id="livemode" class="container">
+		<ul class="collection with-header" id="violation-msg">
+			<li class="collection-header deep-orange darken-4 white-text"><b>Violation Information</b></li>
+			<li class="collection-item grey lighten-5" id="remainingTimeViolation"></li>
+			<li class="collection-item grey lighten-3" id="remainingTimeViolation1"></li>
+			<li class="collection-item grey lighten-5" id="remainingTimeViolation2"></li>
+			<li class="collection-item grey lighten-3" id="remainingTimeViolation3"></li>
+			<li class="collection-item grey lighten-5" id="remainingTimeViolation4"></li>
+		</ul>
+		<p class="card-panel deep-orange darken-4 white-text" id="previour_day_violation">No Violation</p>
+        </div>
+
+	<a class="waves-effect waves-light teal lighten-1 btn hoverable" id="gotoReport"><i class="material-icons">arrow_back</i> Go to Reports</a>
+	
+   <section style="display: none">
+    <div class="error">
+        <div class="row">
+          <div class="col m12"> <span id="dDriveLimitError" class="title-error" style = "display:none;" >11 Hour Driving Limit</span> <span id="dLimitError" class="title-error1" style = "display:none;">Not more than 14 Hour daily Limit</span> </div>
+        </div>
+        <div class="row">
+          <div class="col m12"> <span id="dBreakError" class="title-error2" >30 Minute Break Required</span> <span id="dWeekLimitError" class="title-error1" >70hr/8Day Driving Limit</span> </div>
+        </div>
+
+    </div>
+  </section>
+    
+   <script>
+      // This example displays an address form, using the autocomplete feature
+      // of the Google Places API to help users fill in the information.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+
+      var placeSearch, autocomplete,autocomplete1;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            {types: ['geocode']});
+            
+//             autocomplete1 = new google.maps.places.Autocomplete(
+//            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete1')),
+//            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+        
+        //autocomplete1.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    </script>
+</template>
+<template name="task">
+  <td>{{DateOFDataSaving}}</td>
+</template>
+
+<template name="autocompleteIn">
+	<li>{{> afQuickField name="address" type="googleplace" opts=optsGoogleplace}}</li>
+</template>
+
+<template name="afInput_typeahead">
+  <input type="text" data-schema-key="{{this.name}}" name="{{this.name}}" class="{{this.cls}} form-control typeahead" value="{{this.value}}" autocomplete="off" spellcheck="off" {{this.atts}}/>
+</template>

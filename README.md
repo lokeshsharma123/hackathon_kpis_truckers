@@ -4,7 +4,7 @@
 # Instructions:-
 
 1. Presentation Link:-
-   https://drive.google.com/open?id=1yGp88IWXUpfIhIOHaBa4juRQF-uOh3-s
+   https://drive.google.com/open?id=1uEd0I5w-zISeEH0ATphLy7g_rP3G-8Lu
 
 2. Please setup Meteor on your system, from below link:-
 	 https://www.meteor.com/
@@ -17,6 +17,7 @@
   
 5. Video Link:-
    https://youtu.be/EiljJB5U8F4
-     
-  
-  
+   
+6. Apk Link - https://drive.google.com/open?id=1hwv8blFwUy242CN7X8vQcVspOmmuYqB3
+
+# Screenshots

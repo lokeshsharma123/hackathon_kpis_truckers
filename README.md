@@ -19,5 +19,3 @@
    https://youtu.be/EiljJB5U8F4
    
 6. Apk Link - https://drive.google.com/open?id=1hwv8blFwUy242CN7X8vQcVspOmmuYqB3
-
-# Screenshots
